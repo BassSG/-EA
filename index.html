@@ -3,332 +3,377 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#05080a">
+  <meta name="theme-color" content="#030712">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>EBassWave • SuperApp Hub</title>
+  <title>EBassWave • Quantum SuperApp</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-main: #05080a;
-      --bg-card: rgba(13, 20, 28, 0.7);
-      --accent-cyan: #00f2ff;
-      --accent-violet: #7000ff;
-      --text-main: #f0f4f8;
-      --text-dim: #94a3b8;
+      --bg-dark: #030712;
+      --bg-card: rgba(15, 23, 42, 0.4);
+      --glass: rgba(255, 255, 255, 0.03);
       --glass-border: rgba(255, 255, 255, 0.08);
-      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --accent-main: #53d7ff;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-main);
+      background-color: var(--bg-dark);
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
-      background-image: 
-        radial-gradient(circle at 10% 10%, rgba(0, 242, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 90% 90%, rgba(112, 0, 255, 0.08) 0%, transparent 50%);
-      background-attachment: fixed;
+      /* Dynamic Ambient Background */
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(83, 215, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(168, 139, 255, 0.05) 0%, transparent 40%),
+        #030712;
+    }
+
+    /* --- Luxury Mesh Background --- */
+    .mesh-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.4;
+      background: 
+        radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(242,100%,70%,0.1) 0px, transparent 50%);
+      filter: blur(80px);
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: clamp(20px, 5vw, 60px) 20px;
+      padding: clamp(30px, 8vw, 80px) 24px;
     }
 
+    /* --- Header --- */
     header {
       text-align: center;
-      margin-bottom: 50px;
-      animation: fadeInDown 0.8s ease;
+      margin-bottom: 60px;
+      animation: heroIn 1.2s var(--transition-smooth);
     }
 
-    .brand-logo {
-      width: 90px;
-      height: 90px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
-      padding: 2px;
-      box-shadow: 0 10px 40px rgba(0, 242, 255, 0.25);
+    @keyframes heroIn { from { opacity: 0; transform: translateY(30px) scale(0.95); } }
+
+    .brand-frame {
+      width: 100px; height: 100px;
       margin: 0 auto 24px;
-      transition: var(--transition);
+      position: relative;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent-main), #a88bff);
+      border-radius: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(83, 215, 255, 0.2);
     }
-    .brand-logo:hover { transform: scale(1.05) rotate(5deg); }
-    .brand-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
+    .brand-frame img { 
+      width: 100%; height: 100%; 
+      object-fit: cover; border-radius: 27px;
+      border: 2px solid var(--bg-dark);
+    }
 
     h1 {
-      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
       font-weight: 800;
+      letter-spacing: -2px;
       margin: 0;
-      background: linear-gradient(to bottom, #fff 40%, #94a3b8);
+      background: linear-gradient(to bottom, #fff 30%, #64748b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -1.5px;
     }
 
-    .sub-tag {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 8px 20px;
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 6px 16px;
       border-radius: 100px;
-      font-size: 0.8rem;
-      color: var(--accent-cyan);
-      border: 1px solid var(--glass-border);
-      margin-top: 15px;
-      letter-spacing: 1px;
+      font-size: 0.75rem;
       font-weight: 700;
+      color: var(--accent-main);
+      margin-top: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
+    .status-badge i { width: 6px; height: 6px; background: var(--accent-main); border-radius: 50%; box-shadow: 0 0 10px var(--accent-main); }
 
-    /* --- Search Section --- */
-    .search-wrapper {
-      max-width: 500px;
-      margin: 0 auto 40px;
-      position: relative;
+    /* --- Dashboard Stats --- */
+    .dashboard-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+      animation: fadeIn 1s 0.3s both;
     }
-    .search-bar {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.03);
+    .stat-pill {
+      background: var(--glass);
       border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 16px 24px;
-      color: white;
-      font-size: 1rem;
-      transition: var(--transition);
+      padding: 16px;
+      border-radius: 20px;
+      text-align: center;
       backdrop-filter: blur(10px);
     }
-    .search-bar:focus {
-      border-color: var(--accent-cyan);
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
-    }
+    .stat-pill span { display: block; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+    .stat-pill b { font-size: 1.2rem; font-weight: 700; color: #fff; }
 
-    /* --- Grid Layout --- */
+    /* --- App Grid (Bento Style) --- */
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
     }
 
     .app-card {
       background: var(--bg-card);
       border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      padding: 24px;
+      border-radius: 32px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       text-decoration: none;
       color: inherit;
       position: relative;
       overflow: hidden;
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      backdrop-filter: blur(12px);
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(20px);
     }
 
-    .app-card::before {
+    .app-card::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, var(--glow-color), transparent 70%);
-      opacity: 0;
-      transition: var(--transition);
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     }
 
     .app-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--glow-color);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-shadow);
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--app-color);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 20px rgba(var(--app-rgb), 0.15);
+      background: rgba(30, 41, 59, 0.4);
     }
-    .app-card:hover::before { opacity: 0.15; }
 
-    .app-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      background: #111a24;
-      display: grid;
-      place-items: center;
+    .app-icon-wrapper {
+      width: 64px; height: 64px;
+      border-radius: 20px;
+      background: #0f172a;
+      display: grid; place-items: center;
       position: relative;
-      z-index: 1;
-      transition: var(--transition);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transition: var(--transition-smooth);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    .app-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
-    .app-icon svg { width: 32px; height: 32px; stroke: var(--glow-color); }
+    .app-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+    .app-icon-wrapper svg { width: 30px; height: 30px; stroke: var(--app-color); }
 
-    .app-card:hover .app-icon { transform: scale(1.1) rotate(-5deg); }
+    .app-card:hover .app-icon-wrapper { transform: rotate(-5deg) scale(1.1); }
 
-    .app-info { position: relative; z-index: 1; }
-    .app-info h3 { margin: 0; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
-    .app-info p { margin: 6px 0 0; font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; }
+    .app-body h3 { margin: 0; font-size: 1.4rem; font-weight: 700; }
+    .app-body p { margin: 8px 0 0; font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
 
-    /* --- App Viewer Overlay --- */
-    #viewer-overlay {
+    .btn-enter {
+      margin-top: auto;
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 0.8rem; color: var(--app-color);
+      opacity: 0.6; transition: 0.3s;
+    }
+    .app-card:hover .btn-enter { opacity: 1; }
+
+    /* --- Advanced In-App Viewer --- */
+    #os-viewer {
       position: fixed;
       inset: 0;
-      background: var(--bg-main);
+      background: var(--bg-dark);
       z-index: 2000;
       display: none;
       flex-direction: column;
-      animation: viewerIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: osOpen 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes viewerIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes osOpen { 
+      from { opacity: 0; transform: scale(1.1) translateY(20px); filter: blur(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    }
 
-    .v-header {
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #0d141c;
+    .os-header {
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
     }
 
-    .v-title-box { display: flex; align-items: center; gap: 12px; }
-    .v-title-box img { width: 28px; height: 28px; border-radius: 8px; }
+    .os-title { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+    .os-title img { width: 32px; height: 32px; border-radius: 10px; }
 
-    .v-controls { display: flex; gap: 10px; }
-    .v-btn {
-      background: rgba(255, 255, 255, 0.05);
+    .os-actions { display: flex; gap: 8px; }
+    .os-btn {
+      background: var(--glass);
       border: 1px solid var(--glass-border);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.85rem;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 14px;
+      cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.8rem;
       transition: 0.2s;
     }
-    .v-btn:hover { background: rgba(255, 255, 255, 0.1); }
-    .v-btn.close { background: rgba(255, 80, 80, 0.1); color: #ff5050; border-color: rgba(255, 80, 80, 0.2); }
+    .os-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .os-btn.exit { color: #ff4757; border-color: rgba(255, 71, 87, 0.2); background: rgba(255, 71, 87, 0.05); }
 
-    iframe { flex: 1; border: none; width: 100%; background: #fff; }
+    .os-body { flex: 1; position: relative; background: #fff; overflow: hidden; }
+    iframe { width: 100%; height: 100%; border: none; }
 
-    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    /* --- Loader --- */
+    .os-loader {
+      position: absolute; inset: 0;
+      background: var(--bg-dark);
+      display: grid; place-items: center;
+      z-index: 10; transition: 0.5s;
+    }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--glass); border-top-color: var(--accent-main); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 768px) {
-      .app-grid { grid-template-columns: 1fr; gap: 16px; }
+      .app-grid { grid-template-columns: 1fr; }
       .container { padding-top: 40px; }
-      .v-btn span { display: none; }
+      .os-btn span { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <div class="mesh-gradient"></div>
+
   <div class="container">
     <header>
-      <div class="brand-logo">
+      <div class="brand-frame">
         <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" alt="Logo">
       </div>
-      <h1 id="greeting">EBassWave SuperApp</h1>
-      <div class="sub-tag">11 PREMIUM APPLICATIONS</div>
+      <h1 id="greeting">Quantum AI Hub</h1>
+      <div class="status-badge"><i></i> System Online • 11 Active Apps</div>
     </header>
 
-    <div class="search-wrapper">
-      <input type="text" class="search-bar" id="search" placeholder="ค้นหาแอปของพี่เบส...">
+    <div class="dashboard-row">
+      <div class="stat-pill"><span>Date</span><b id="date">-- -- --</b></div>
+      <div class="stat-pill"><span>Uptime</span><b id="uptime">00:00</b></div>
+      <div class="stat-pill"><span>Environment</span><b>Premium</b></div>
     </div>
 
-    <main class="app-grid" id="grid"></main>
+    <main class="app-grid" id="mainGrid"></main>
   </div>
 
-  <section id="viewer-overlay">
-    <div class="v-header">
-      <div class="v-title-box">
+  <section id="os-viewer">
+    <div class="os-header">
+      <div class="os-title">
         <img id="v-icon" src="">
-        <span id="v-name" style="font-weight: 700;">App Name</span>
+        <span id="v-name">App</span>
       </div>
-      <div class="v-controls">
-        <button class="v-btn" onclick="location.reload()"><span>รีเฟรช Hub</span></button>
-        <button class="v-btn" onclick="openFull()"><span>เบราว์เซอร์</span></button>
-        <button class="v-btn close" onclick="closeApp()">ปิดแอป</button>
+      <div class="os-actions">
+        <button class="os-btn" onclick="refreshApp()"><span>Reload</span></button>
+        <button class="os-btn" onclick="window.open(document.getElementById('v-iframe').src)"><span>External</span></button>
+        <button class="os-btn exit" onclick="closeApp()">Close Hub</button>
       </div>
     </div>
-    <iframe id="v-iframe" allow="geolocation; microphone; camera; midi; encrypted-media; clipboard-write;"></iframe>
+    <div class="os-body">
+      <div id="v-loader" class="os-loader"><div class="spinner"></div></div>
+      <iframe id="v-iframe" src=""></iframe>
+    </div>
   </section>
 
   <script>
-    // --- Full 11 Apps Data ---
     const APPS = [
-      { name: 'TAPro', desc: 'Trading Analysis Platform (PROD)', url: 'https://basssg.github.io/AlphaSense-Analysis-Webapp/', color: '#00f2ff', icon: 'https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372' },
-      { name: 'SnD Analysis', desc: 'Automated Supply & Demand Analysis', url: 'https://basssg.github.io/SnD_Analysis/', color: '#00ff95', icon: 'https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372' },
-      { name: 'SnDFX', desc: 'Forex S&D Zone Detection', url: 'https://basssg.github.io/SnDForex/', color: '#4c79ff', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s' },
-      { name: 'XAUUSD News', desc: 'อัปเดตข่าวสารทองคำเรียลไทม์', url: 'https://basssg.github.io/XAUUSD-NEWS/', color: '#ffd93d', icon: 'https://www.advfn.com/common/images/company/PM_XAUUSD.png' },
-      { name: 'Dashboard', desc: 'System Metrics & Status Control', url: 'https://basssg.github.io/TAProAlert-Dashboard/', color: '#a88bff', icon: 'https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png' },
-      { name: 'GoogleSheet', desc: 'Enhanced Spreadsheet & Data', url: 'https://basssg.github.io/GoogleSheet/', color: '#ff8a4c', isSvg: true, svg: '<path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>' },
-      { name: 'App Script', desc: 'Google Apps Script Automation', url: 'https://basssg.github.io/GoogleAppScript/', color: '#ff6b9d', isSvg: true, svg: '<path d="M9 7L5 12l4 5M15 7l4 5-4 5"/>' },
-      { name: 'Investment', desc: 'Portfolio Tracking & Analysis', url: 'https://basssg.github.io/Investment/', color: '#39ffb6', icon: 'https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg' },
-      { name: 'TripPlanner', desc: 'Smart AI Travel Assistant', url: 'https://basssg.github.io/TripPlanner/', color: '#53d7ff', icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372' },
-      { name: 'GaNesh (PIC)', desc: 'คลังภาพความทรงจำน้องกาเนส', url: 'https://basssg.github.io/GaNesh27/', color: '#ff5757', isSvg: true, svg: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-6-6-5 5-2-2-5 5"/>' },
-      { name: 'PickUp', desc: 'Real-time Pickup Tracking', url: 'https://basssg.github.io/Pickup/', color: '#00f2ff', isSvg: true, svg: '<path d="M3 15h2l2-3h6l2 3h4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>' }
+      { id: 1, name: 'TAPro', desc: 'Automated Trading Analysis Platform (Production)', url: 'https://basssg.github.io/AlphaSense-Analysis-Webapp/', color: '#53d7ff', rgb: '83, 215, 255', img: 'https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372' },
+      { id: 2, name: 'SnD Analysis', desc: 'Advanced Supply & Demand Market Detection', url: 'https://basssg.github.io/SnD_Analysis/', color: '#39ffb6', rgb: '57, 255, 182', img: 'https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372' },
+      { id: 3, name: 'SnDFX', desc: 'Forex Specialized S&D Zone Visualizer', url: 'https://basssg.github.io/SnDForex/', color: '#4c79ff', rgb: '76, 121, 255', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s' },
+      { id: 4, name: 'XAUUSD News', desc: 'Real-time Gold Market News & Fundamentals', url: 'https://basssg.github.io/XAUUSD-NEWS/', color: '#ffd93d', rgb: '255, 217, 61', img: 'https://www.advfn.com/common/images/company/PM_XAUUSD.png' },
+      { id: 5, name: 'Dashboard', desc: 'Hub System Metrics & Status Control Center', url: 'https://basssg.github.io/TAProAlert-Dashboard/', color: '#a88bff', rgb: '168, 139, 255', img: 'https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png' },
+      { id: 6, name: 'GoogleSheet', desc: 'Institutional Spreadsheet & Database Engine', url: 'https://basssg.github.io/GoogleSheet/', color: '#ff8a4c', rgb: '255, 138, 76', icon: '<path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>' },
+      { id: 7, name: 'App Script', desc: 'Custom Automation & Script Logic Controller', url: 'https://basssg.github.io/GoogleAppScript/', color: '#ff6b9d', rgb: '255, 107, 157', icon: '<path d="M9 7L5 12l4 5M15 7l4 5-4 5"/>' },
+      { id: 8, name: 'Investment', desc: 'Wealth Tracking & Portfolio Performance', url: 'https://basssg.github.io/Investment/', color: '#39ffb6', rgb: '57, 255, 182', img: 'https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg' },
+      { id: 9, name: 'TripPlanner', desc: 'AI-Powered Smart Travel Itinerary Planner', url: 'https://basssg.github.io/TripPlanner/', color: '#53d7ff', rgb: '83, 215, 255', img: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372' },
+      { id: 10, name: 'GaNesh (PIC)', desc: 'Ganesh Memories • Exclusive Personal Gallery', url: 'https://basssg.github.io/GaNesh27/', color: '#ff5757', rgb: '255, 87, 87', icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-6-6-5 5-2-2-5 5"/>' },
+      { id: 11, name: 'PickUp', desc: 'Logistics & Logistics Status Tracking System', url: 'https://basssg.github.io/Pickup/', color: '#53d7ff', rgb: '83, 215, 255', icon: '<path d="M3 15h2l2-3h6l2 3h4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>' }
     ];
 
-    const grid = document.getElementById('grid');
-    const search = document.getElementById('search');
+    const grid = document.getElementById('mainGrid');
 
-    function render(filter = '') {
-      grid.innerHTML = '';
-      APPS.filter(a => a.name.toLowerCase().includes(filter.toLowerCase())).forEach(app => {
-        const div = document.createElement('a');
-        div.className = 'app-card';
-        div.href = '#';
-        div.style.setProperty('--glow-color', app.color);
-        div.style.setProperty('--glow-shadow', app.color + '44');
-        div.onclick = (e) => { e.preventDefault(); openApp(app); };
-
-        const iconContent = app.isSvg 
-          ? `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${app.svg}</svg>`
-          : `<img src="${app.icon}" onerror="this.src='https://ui-avatars.com/api/?name=${app.name}&background=111a24&color=fff'">`;
-
-        div.innerHTML = `
-          <div class="app-icon">${iconContent}</div>
-          <div class="app-info">
+    function render() {
+      grid.innerHTML = APPS.map(app => `
+        <a href="#" class="app-card" style="--app-color: ${app.color}; --app-rgb: ${app.rgb};" onclick="openApp(${app.id}, event)">
+          <div class="app-icon-wrapper">
+            ${app.img ? `<img src="${app.img}">` : `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${app.icon}</svg>`}
+          </div>
+          <div class="app-body">
             <h3>${app.name}</h3>
             <p>${app.desc}</p>
           </div>
-        `;
-        grid.appendChild(div);
-      });
+          <div class="btn-enter">LAUNCH APP <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></div>
+        </a>
+      `).join('');
     }
 
-    const overlay = document.getElementById('viewer-overlay');
+    const viewer = document.getElementById('os-viewer');
     const iframe = document.getElementById('v-iframe');
+    const loader = document.getElementById('v-loader');
 
-    function openApp(app) {
+    function openApp(id, e) {
+      e.preventDefault();
+      const app = APPS.find(a => a.id === id);
       document.getElementById('v-name').textContent = app.name;
-      document.getElementById('v-icon').src = app.isSvg ? '' : app.icon;
-      document.getElementById('v-icon').style.display = app.isSvg ? 'none' : 'block';
+      document.getElementById('v-icon').src = app.img || '';
+      document.getElementById('v-icon').style.display = app.img ? 'block' : 'none';
+      
+      loader.style.display = 'grid';
       iframe.src = app.url;
-      overlay.style.display = 'flex';
+      viewer.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-      history.pushState({view: 'app'}, '', '#' + app.name.replace(/\s/g, ''));
+      
+      iframe.onload = () => { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 500); };
     }
 
     function closeApp() {
-      overlay.style.display = 'none';
-      iframe.src = '';
-      document.body.style.overflow = 'auto';
+      viewer.style.opacity = '0';
+      setTimeout(() => {
+        viewer.style.display = 'none';
+        viewer.style.opacity = '1';
+        iframe.src = '';
+        document.body.style.overflow = 'auto';
+      }, 400);
     }
 
-    function openFull() { window.open(iframe.src, '_blank'); }
+    function refreshApp() { loader.style.display = 'grid'; loader.style.opacity = '1'; iframe.src = iframe.src; }
 
-    search.oninput = (e) => render(e.target.value);
+    // Logic: Time & Greeting
+    function updateOS() {
+      const now = new Date();
+      document.getElementById('date').textContent = now.toLocaleDateString('th-TH', { day:'numeric', month:'short', year:'2-digit' });
+      const hr = now.getHours();
+      const g = document.getElementById('greeting');
+      if(hr < 12) g.textContent = "Morning, P'Best";
+      else if(hr < 18) g.textContent = "Afternoon, P'Best";
+      else g.textContent = "Evening, P'Best";
+    }
 
-    // Dynamic Greeting
-    const hr = new Date().getHours();
-    const g = document.getElementById('greeting');
-    if(hr < 12) g.textContent = "อรุณสวัสดิ์ครับ พี่เบส";
-    else if(hr < 18) g.textContent = "สวัสดีตอนบ่ายครับ พี่เบส";
-    else g.textContent = "สวัสดีตอนเย็นครับ พี่เบส";
+    // Uptime
+    let s = 0;
+    setInterval(() => {
+      s++;
+      const m = Math.floor(s/60);
+      document.getElementById('uptime').textContent = `${String(m).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+    }, 1000);
 
     render();
-    window.onpopstate = () => closeApp();
+    updateOS();
   </script>
 </body>
 </html>
