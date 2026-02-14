@@ -2,390 +2,447 @@
 <html lang="th">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#030708">
-  <title>EBassWave • SuperApp</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#05080a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>EBassWave • SuperApp Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #030708;
-      --glass: rgba(255, 255, 255, 0.03);
+      --bg-main: #05080a;
+      --bg-card: rgba(13, 20, 28, 0.7);
+      --accent-cyan: #00f2ff;
+      --accent-violet: #7000ff;
+      --accent-green: #00ff95;
+      --text-main: #f0f4f8;
+      --text-dim: #94a3b8;
       --glass-border: rgba(255, 255, 255, 0.08);
-      --accent: #53d7ff;
-      --accent-glow: rgba(83, 215, 255, 0.3);
-      --text-main: #ffffff;
-      --text-sub: #8a8f98;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background-color: var(--bg-main);
       color: var(--text-main);
-      min-height: 100vh;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
     }
 
-    /* Animated Mesh Background (GPU Optimized) */
-    .mesh-bg {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: 
-        radial-gradient(circle at 0% 0%, #161b22 0%, transparent 50%),
-        radial-gradient(circle at 100% 100%, #0d1117 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, #030708 0%, transparent 100%);
-      z-index: -1;
-    }
-
-    .mesh-orb {
-      position: absolute;
-      width: 600px; height: 600px;
-      background: var(--accent);
-      filter: blur(140px);
-      border-radius: 50%;
-      opacity: 0.07;
-      pointer-events: none;
-      animation: drift 20s infinite alternate ease-in-out;
-    }
-
-    @keyframes drift {
-      from { transform: translate(-10%, -10%) scale(1); }
-      to { transform: translate(20%, 20%) scale(1.2); }
-    }
+    /* --- Scrollbar Custom --- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: #1a2633; border-radius: 10px; }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 4rem 2rem;
-      width: 100%;
+      padding: clamp(20px, 5vw, 40px);
     }
 
-    /* --- Header Design --- */
+    /* --- Header Section --- */
     header {
-      margin-bottom: 5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-    }
-
-    .logo-container {
-      position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 50px;
     }
 
     .brand-logo {
-      width: 100px; height: 100px;
-      border-radius: 28px;
-      object-fit: cover;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      z-index: 2;
-      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      padding: 2px;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+      margin-bottom: 20px;
+      transition: var(--transition);
     }
-
-    .logo-glow {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120%; height: 120%;
-      background: var(--accent);
-      filter: blur(40px);
-      opacity: 0.2;
-      z-index: 1;
-    }
+    .brand-logo:hover { transform: scale(1.05) rotate(5deg); }
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
 
     h1 {
-      font-size: 3rem;
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 800;
       margin: 0;
-      letter-spacing: -2px;
-      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+      background: linear-gradient(to right, #fff, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
     }
 
-    .status-badge {
+    .sub-tag {
+      background: rgba(255, 255, 255, 0.05);
       padding: 6px 16px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
       border-radius: 100px;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      border: 1px solid var(--glass-border);
+      margin-top: 10px;
       font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 1rem;
-      backdrop-filter: blur(10px);
     }
 
-    /* --- App Grid --- */
+    /* --- Search & Filter --- */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-bar {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 14px 20px;
+      color: white;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-bar:focus { border-color: var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+
+    /* --- Bento Grid --- */
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-      perspective: 1000px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
     }
 
     .app-card {
-      background: var(--glass);
+      background: var(--bg-card);
       border: 1px solid var(--glass-border);
-      border-radius: 32px;
-      padding: 1.8rem;
+      border-radius: 24px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 16px;
       text-decoration: none;
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      backdrop-filter: blur(20px);
+      color: inherit;
       position: relative;
       overflow: hidden;
-    }
-
-    .app-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-      pointer-events: none;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .app-card:hover {
-      transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
-      border-color: rgba(83, 215, 255, 0.4);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 20px rgba(83, 215, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .app-header {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
+      transform: translateY(-8px);
+      background: rgba(25, 35, 45, 0.8);
+      border-color: var(--glow-color);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-opacity);
     }
 
     .app-icon {
-      width: 64px; height: 64px;
-      border-radius: 18px;
-      object-fit: cover;
-      background: #000;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #1a2633;
+      display: grid;
+      place-items: center;
+      transition: var(--transition);
     }
+    .app-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+    .app-icon svg { width: 28px; height: 28px; stroke: white; }
 
-    .app-title {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #fff;
-      margin: 0;
+    .app-card:hover .app-icon { transform: scale(1.1) rotate(-5deg); }
+
+    .app-info h3 { margin: 0; font-size: 1.25rem; font-weight: 700; }
+    .app-info p { margin: 4px 0 0; font-size: 0.9rem; color: var(--text-dim); line-height: 1.4; }
+
+    .app-card .arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      opacity: 0.3;
+      transition: var(--transition);
     }
+    .app-card:hover .arrow { opacity: 1; transform: translateX(4px); }
 
-    .app-desc {
-      font-size: 0.9rem;
-      color: var(--text-sub);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .app-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-    }
-
-    .launch-btn {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* --- Modern App Viewer --- */
-    .viewer {
+    /* --- In-App Viewer --- */
+    #super-viewer {
       position: fixed;
       inset: 0;
-      background: #000;
-      z-index: 2000;
+      background: var(--bg-main);
+      z-index: 1000;
       display: none;
       flex-direction: column;
-      animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes zoomIn {
-      from { opacity: 0; transform: scale(1.1); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
     }
 
-    .viewer-bar {
-      padding: 1rem 2rem;
-      background: rgba(3, 7, 8, 0.8);
-      backdrop-filter: blur(20px);
+    .viewer-header {
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: rgba(13, 20, 28, 0.95);
       border-bottom: 1px solid var(--glass-border);
     }
 
-    .close-btn {
-      background: var(--glass);
+    .viewer-controls { display: flex; gap: 10px; }
+    .v-btn {
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--glass-border);
-      color: #fff;
-      padding: 8px 20px;
-      border-radius: 100px;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
-      transition: 0.3s;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+    .v-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    .v-btn.close { background: rgba(255, 50, 50, 0.1); color: #ff5050; }
+
+    iframe { flex: 1; border: none; width: 100%; background: white; }
+
+    /* --- Performance Mode Toggle --- */
+    .perf-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 99;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .close-btn:hover {
-      background: #ff4757;
-      border-color: #ff4757;
-    }
-
-    iframe { width: 100%; flex-grow: 1; border: none; }
-
-    /* Mobile */
+    /* --- Responsiveness --- */
     @media (max-width: 768px) {
-      .container { padding: 2rem 1.2rem; }
-      h1 { font-size: 2.2rem; }
       .app-grid { grid-template-columns: 1fr; }
+      .container { padding: 20px; }
+      h1 { font-size: 2.2rem; }
+    }
+
+    /* --- Performance Class --- */
+    .low-perf * {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      animation: none !important;
+      transition: none !important;
     }
   </style>
 </head>
 <body>
 
-  <div class="mesh-bg"><div class="mesh-orb"></div></div>
-
   <div class="container">
     <header>
-      <div class="logo-container">
-        <div class="logo-glow"></div>
-        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" class="brand-logo" alt="Logo">
+      <div class="brand-logo">
+        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" alt="Logo">
       </div>
-      <h1>EBassWave</h1>
-      <div class="status-badge">System Online • 2026</div>
+      <h1 id="user-greeting">EBassWave SuperApp</h1>
+      <div class="sub-tag">PREMIUM ACCESS • HUB V3.0</div>
     </header>
 
-    <main class="app-grid">
-      
-      <a href="https://basssg.github.io/AlphaSense-Analysis-Webapp/" class="app-card">
-        <div class="app-header">
-          <img src="https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372" class="app-icon">
-          <div class="app-title">TAPro</div>
-        </div>
-        <p class="app-desc">ศูนย์วิเคราะห์เทคนิคขั้นสูงสำหรับการเทรด ด้วยระบบอัตโนมัติที่มีความแม่นยำสูงสุด</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/SnD_Analysis/" class="app-card">
-        <div class="app-header">
-          <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372" class="app-icon">
-          <div class="app-title">SnD Analysis</div>
-        </div>
-        <p class="app-desc">Supply & Demand Zone Detection. หาจุดกลับตัวของตลาดได้ทันท่วงที</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/SnDForex/" class="app-card">
-        <div class="app-header">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s" class="app-icon">
-          <div class="app-title">SnDFX</div>
-        </div>
-        <p class="app-desc">Forex market analysis focus. ออกแบบมาเพื่อตลาดแลกเปลี่ยนเงินต่างประเทศโดยเฉพาะ</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/XAUUSD-NEWS/" class="app-card">
-        <div class="app-header">
-          <img src="https://www.advfn.com/common/images/company/PM_XAUUSD.png" class="app-icon">
-          <div class="app-title">Gold Hub</div>
-        </div>
-        <p class="app-desc">รวมทุกความเคลื่อนไหวของราคาทองคำและข่าวเศรษฐกิจโลกที่ส่งผลกระทบ</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/TAProAlert-Dashboard/" class="app-card">
-        <div class="app-header">
-          <img src="https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png" class="app-icon">
-          <div class="app-title">Command Center</div>
-        </div>
-        <p class="app-desc">แดชบอร์ดควบคุมและดูสถานะระบบการทำงานทั้งหมดในที่เดียว</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/TripPlanner/" class="app-card">
-        <div class="app-header">
-          <img src="https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372" class="app-icon">
-          <div class="app-title">Trip Planner</div>
-        </div>
-        <p class="app-desc">จัดการทริปเดินทางของคุณให้เป็นเรื่องง่าย ด้วย AI ช่วยวางแผนและกำหนดเวลา</p>
-        <div class="app-footer">
-          <span class="launch-btn">Open Project</span>
-        </div>
-      </a>
-
-      <a href="https://basssg.github.io/GaNesh27/" class="app-card">
-        <div class="app-header">
-          <div class="app-icon" style="display:grid; place-items:center; background:linear-gradient(45deg, #53d7ff, #a88bff); font-size:1.5rem;">👶</div>
-          <div class="app-title">GaNesh PIC</div>
-        </div>
-        <p class="app-desc">บันทึกความทรงจำและรูปภาพที่สวยงามของกาเนส ลูกชายสุดที่รัก</p>
-        <div class="app-footer">
-          <span class="launch-btn">View Gallery</span>
-        </div>
-      </a>
-
-    </main>
-  </div>
-
-  <div id="viewer" class="viewer">
-    <div class="viewer-bar">
-      <div id="v-title" style="font-weight:700">Project Alpha</div>
-      <button class="close-btn" onclick="closeApp()">BACK TO HUB</button>
+    <div class="controls">
+      <input type="text" class="search-bar" id="searchApp" placeholder="ค้นหาแอปพลิเคชัน...">
     </div>
-    <iframe id="iframe" src=""></iframe>
+
+    <main class="app-grid" id="mainGrid">
+      </main>
   </div>
+
+  <div class="perf-toggle" onclick="togglePerf()">
+    <span id="perf-status">⚡ Performance: High</span>
+  </div>
+
+  <section id="super-viewer">
+    <div class="viewer-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img id="v-app-icon" src="" style="width: 24px; height: 24px; border-radius: 6px;">
+        <span id="v-app-name" style="font-weight: 700;">App Name</span>
+      </div>
+      <div class="viewer-controls">
+        <button class="v-btn" onclick="reloadApp()">รีโหลด</button>
+        <button class="v-btn" onclick="openExternal()">เบราว์เซอร์</button>
+        <button class="v-btn close" onclick="closeApp()">ปิดแอป</button>
+      </div>
+    </div>
+    <iframe id="app-iframe" allow="geolocation; microphone; camera; midi; encrypted-media;"></iframe>
+  </section>
 
   <script>
-    const viewer = document.getElementById('viewer');
-    const iframe = document.getElementById('iframe');
-    const vTitle = document.getElementById('v-title');
+    // --- App Configuration ---
+    const APPS = [
+      {
+        id: 'tapro',
+        name: 'TAPro',
+        desc: 'Automated Trading Analysis Platform',
+        url: 'https://basssg.github.io/AlphaSense-Analysis-Webapp/',
+        icon: 'https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372',
+        color: '#00f2ff'
+      },
+      {
+        id: 'snd-analysis',
+        name: 'SnD Analysis',
+        desc: 'Automated SnD & Signal Detection',
+        url: 'https://basssg.github.io/SnD_Analysis/',
+        icon: 'https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372',
+        color: '#00ff95'
+      },
+      {
+        id: 'sndfx',
+        name: 'SnDFX',
+        desc: 'Supply & Demand Zone Analysis',
+        url: 'https://basssg.github.io/SnDForex/',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s',
+        color: '#0062ff'
+      },
+      {
+        id: 'xauusd',
+        name: 'XAUUSD News',
+        desc: 'ข่าวสารและข้อมูลเรียลไทม์ทองคำ',
+        url: 'https://basssg.github.io/XAUUSD-NEWS/',
+        icon: 'https://www.advfn.com/common/images/company/PM_XAUUSD.png',
+        color: '#ffcc00'
+      },
+      {
+        id: 'dashboard',
+        name: 'Dashboard',
+        desc: 'System Metrics & Metrics Overview',
+        url: 'https://basssg.github.io/TAProAlert-Dashboard/',
+        icon: 'https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png',
+        color: '#a855f7'
+      },
+      {
+        id: 'ganesh',
+        name: 'GaNesh (PIC)',
+        desc: 'อัลบั้มภาพน้องกาเนส ลูกชายหัวแก้วหัวแหวน',
+        url: 'https://basssg.github.io/GaNesh27/',
+        icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372',
+        color: '#ec4899'
+      },
+      {
+        id: 'tripplanner',
+        name: 'TripPlanner',
+        desc: 'Smart Travel Assistant',
+        url: 'https://basssg.github.io/TripPlanner/',
+        icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372',
+        color: '#f97316'
+      },
+      {
+        id: 'investment',
+        name: 'Investment',
+        desc: 'Portfolio & Wealth Management',
+        url: 'https://basssg.github.io/Investment/',
+        icon: 'https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg',
+        color: '#10b981'
+      }
+    ];
 
-    document.querySelectorAll('.app-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = card.getAttribute('href');
-        const title = card.querySelector('.app-title').innerText;
+    const grid = document.getElementById('mainGrid');
+    const searchInput = document.getElementById('searchApp');
+    const viewer = document.getElementById('super-viewer');
+    const iframe = document.getElementById('app-iframe');
+
+    // --- Render Apps ---
+    function renderApps(filter = '') {
+      grid.innerHTML = '';
+      const filtered = APPS.filter(app => 
+        app.name.toLowerCase().includes(filter.toLowerCase()) || 
+        app.desc.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      filtered.forEach((app, index) => {
+        const card = document.createElement('a');
+        card.className = 'app-card';
+        card.href = "#";
+        card.style.setProperty('--glow-color', app.color);
+        card.style.setProperty('--glow-opacity', app.color + '33');
+        card.onclick = (e) => { e.preventDefault(); openApp(app); };
         
-        vTitle.innerText = title;
-        iframe.src = url;
-        viewer.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        card.innerHTML = `
+          <div class="arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+          <div class="app-icon">
+            <img src="${app.icon}" alt="${app.name}" onerror="this.src='https://ui-avatars.com/api/?name=${app.name}&background=1a2633&color=fff'">
+          </div>
+          <div class="app-info">
+            <h3>${app.name}</h3>
+            <p>${app.desc}</p>
+          </div>
+        `;
+        grid.appendChild(card);
       });
-    });
+    }
+
+    // --- App Actions ---
+    function openApp(app) {
+      document.getElementById('v-app-name').textContent = app.name;
+      document.getElementById('v-app-icon').src = app.icon;
+      iframe.src = app.url;
+      viewer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      history.pushState({app: app.id}, '', `#${app.id}`);
+    }
 
     function closeApp() {
       viewer.style.display = 'none';
-      iframe.src = "";
+      iframe.src = '';
       document.body.style.overflow = 'auto';
+      history.pushState(null, '', window.location.pathname);
     }
+
+    function reloadApp() {
+      const currentSrc = iframe.src;
+      iframe.src = currentSrc;
+    }
+
+    function openExternal() {
+      window.open(iframe.src, '_blank');
+    }
+
+    // --- Performance Toggle ---
+    let isLowPerf = false;
+    function togglePerf() {
+      isLowPerf = !isLowPerf;
+      document.body.classList.toggle('low-perf', isLowPerf);
+      document.getElementById('perf-status').textContent = isLowPerf ? '⚡ Performance: Eco' : '⚡ Performance: High';
+    }
+
+    // --- Init ---
+    renderApps();
+
+    searchInput.oninput = (e) => renderApps(e.target.value);
+
+    window.onpopstate = (e) => {
+      if (!e.state) closeApp();
+    };
+
+    // Greeting by time
+    const hr = new Date().getHours();
+    const greetingEl = document.getElementById('user-greeting');
+    if (hr < 12) greetingEl.textContent = "อรุณสวัสดิ์ครับ พี่เบส";
+    else if (hr < 18) greetingEl.textContent = "สวัสดีตอนบ่ายครับ พี่เบส";
+    else greetingEl.textContent = "สวัสดีตอนเย็นครับ พี่เบส";
+
   </script>
 </body>
 </html>
