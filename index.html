@@ -1,419 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>EBassWave OS</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>EBassWave | SuperApp Hub</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05070a;
+      --card-bg: rgba(15, 20, 28, 0.7);
+      --accent: #53d7ff; /* Cyan */
+      --accent-alt: #a88bff; /* Violet */
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --glass: blur(12px);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-deep: #050505;
-            --bg-panel: #111111;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.2);
-            --primary: #3b82f6;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --glass: rgba(20, 20, 20, 0.6);
-            --blur: blur(20px);
-            --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Kanit', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      /* แสงพื้นหลังนุ่มๆ ไม่กินสเปค */
+      background: radial-gradient(circle at 0% 0%, rgba(83, 215, 255, 0.05) 0%, transparent 40%),
+                  radial-gradient(circle at 100% 100%, rgba(168, 139, 255, 0.05) 0%, transparent 40%);
+    }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body {
-            margin: 0;
-            background-color: var(--bg-deep);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 40%),
-                linear-gradient(to bottom, #000 0%, #0a0a0a 100%);
-            color: var(--text-main);
-            font-family: 'Inter', 'Prompt', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: max(40px, env(safe-area-inset-top));
+    }
 
-        /* --- Header --- */
-        .header {
-            width: 100%;
-            max-width: 1200px;
-            padding: 1.5rem 1.5rem 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-        }
+    /* Header & Branding */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .logo-container {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 15px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      border-radius: 20px;
+      padding: 2px;
+      box-shadow: 0 10px 25px rgba(83, 215, 255, 0.2);
+    }
 
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #fff, #888);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: #000;
-            font-size: 20px;
-        }
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+    }
 
-        .brand-text h1 {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
-        
-        .brand-text p {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin: 0;
-        }
+    h1 {
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -0.5px;
+      margin: 0;
+      background: linear-gradient(to right, #fff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .time-badge {
-            background: rgba(255,255,255,0.05);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-family: monospace;
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-        }
+    .status-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(83, 215, 255, 0.1);
+      border: 1px solid rgba(83, 215, 255, 0.2);
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 10px;
+    }
 
-        /* --- Search Bar --- */
-        .search-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 1.5rem;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
+    /* App Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
 
-        .search-box {
-            width: 100%;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            padding: 14px 20px;
-            border-radius: 16px;
-            color: white;
-            font-size: 16px;
-            transition: 0.3s var(--ease);
-            outline: none;
-        }
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: var(--glass);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .search-box:focus {
-            background: rgba(255,255,255,0.08);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
+    /* เอฟเฟกต์สะท้อนตอน Hover */
+    .app-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
 
-        /* --- Bento Grid Layout --- */
-        .grid-container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 1.5rem 4rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 16px;
-            animation: fadeIn 0.6s var(--ease);
-        }
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #1a222f;
+      padding: 8px; /* สำหรับ SVG */
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .app-icon.no-padding { padding: 0; }
 
-        /* --- Card Design --- */
-        .card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 20px;
-            height: 160px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: 0.3s var(--ease);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-        }
+    .app-name {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
 
-        .card:hover {
-            transform: translateY(-4px);
-            background: rgba(255,255,255,0.06);
-            border-color: var(--border-hover);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
+    .app-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-        .card:active {
-            transform: scale(0.98);
-        }
+    /* WebApp Viewer (SuperApp Overlay) */
+    #viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--bg);
+      display: none;
+      flex-direction: column;
+      animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        /* Icon Container */
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+    @keyframes slideIn {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
 
-        .card-info h3 {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0 0 4px 0;
-            color: #fff;
-        }
+    .viewer-header {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 7, 10, 0.8);
+      backdrop-filter: blur(10px);
+    }
 
-        .card-info p {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .close-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-        /* Special Card: GaNesh */
-        .card.special {
-            background: linear-gradient(135deg, rgba(255, 99, 99, 0.15), rgba(255, 99, 99, 0.05));
-            border-color: rgba(255, 99, 99, 0.3);
-            grid-column: span 2; /* Make it wider */
-        }
-        
-        .card.special .card-icon {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-        }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
 
-        /* Special Card: TAPro */
-        .card.pro {
-            border-color: rgba(59, 130, 246, 0.4);
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.02));
-        }
+    /* Tablet/Desktop Tweaks */
+    @media (min-width: 768px) {
+      .app-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px; }
+      .app-card { padding: 30px; }
+      .app-icon { width: 64px; height: 64px; }
+      h1 { font-size: 2.8rem; }
+    }
 
-        /* --- Super Overlay (App Viewer) --- */
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            transform: translateY(100%);
-            transition: transform 0.4s var(--ease);
-        }
-
-        .overlay.active {
-            transform: translateY(0);
-        }
-
-        .overlay-bar {
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .bar-title {
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-close {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .btn-close:hover { background: rgba(255,255,255,0.2); }
-
-        .app-iframe {
-            flex: 1;
-            border: none;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-        }
-
-        .loader {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-dim);
-            font-size: 14px;
-            z-index: -1;
-        }
-
-        /* SVG Icons */
-        svg { width: 24px; height: 24px; fill: currentColor; }
-
-        @media (max-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .card { height: 140px; }
-            .card.special { grid-column: span 2; }
-        }
-    </style>
+    /* Mobile Bottom Padding for PWA */
+    footer {
+      height: 80px;
+    }
+  </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="brand">
-            <div class="brand-logo">B</div>
-            <div class="brand-text">
-                <h1>EBassWave</h1>
-                <p>SuperApp OS v2.0</p>
-            </div>
-        </div>
-        <div class="time-badge" id="clock">00:00</div>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" alt="Logo">
+      </div>
+      <h1>EBassWave Hub</h1>
+      <div class="status-tag">System Online • v3.0</div>
     </header>
 
-    <div class="search-wrapper">
-        <input type="text" class="search-box" id="searchInput" placeholder="Search apps..." autocomplete="off">
+    <main class="app-grid">
+      
+      <a href="#" class="app-card" onclick="openApp('TAPro', 'https://basssg.github.io/AlphaSense-Analysis-Webapp/')">
+        <img src="https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp" class="app-icon no-padding" alt="TAPro">
+        <div class="app-name">TAPro</div>
+        <div class="app-desc">Trading Analysis Platform</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('SnD Analysis', 'https://basssg.github.io/SnD_Analysis/')">
+        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp" class="app-icon no-padding" alt="SnD">
+        <div class="app-name">SnD Analysis</div>
+        <div class="app-desc">Supply & Demand Core</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('SnDFX', 'https://basssg.github.io/SnDForex/')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s" class="app-icon no-padding" alt="SnDFX">
+        <div class="app-name">SnDFX</div>
+        <div class="app-desc">Forex Zone Trading</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('Dashboard', 'https://basssg.github.io/TAProAlert-Dashboard/')">
+        <img src="https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png" class="app-icon no-padding" alt="Dash">
+        <div class="app-name">Dashboard</div>
+        <div class="app-desc">System Status</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('XAUUSD News', 'https://basssg.github.io/XAUUSD-NEWS/')">
+        <img src="https://www.advfn.com/common/images/company/PM_XAUUSD.png" class="app-icon no-padding" alt="Gold">
+        <div class="app-name">XAUUSD</div>
+        <div class="app-desc">Gold Market News</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('GaNesh PIC', 'https://basssg.github.io/GaNesh27/')">
+        <img src="https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png" class="app-icon no-padding" alt="Ganesh">
+        <div class="app-name">GaNesh</div>
+        <div class="app-desc">Family Memories</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('TripPlanner', 'https://basssg.github.io/TripPlanner/')">
+        <div class="app-icon" style="background: #10b981; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">✈️</div>
+        <div class="app-name">TripPlanner</div>
+        <div class="app-desc">Travel Assistant</div>
+      </a>
+
+      <a href="#" class="app-card" onclick="openApp('Pickup', 'https://basssg.github.io/Pickup/')">
+        <div class="app-icon" style="background: #f59e0b; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">📦</div>
+        <div class="app-name">Pickup</div>
+        <div class="app-desc">Delivery System</div>
+      </a>
+
+    </main>
+
+    <footer></footer>
+  </div>
+
+  <div id="viewer">
+    <div class="viewer-header">
+      <span id="viewer-title" style="font-weight: 700;">Application</span>
+      <button class="close-btn" onclick="closeApp()">ปิดแอป</button>
     </div>
+    <iframe id="app-frame" src=""></iframe>
+  </div>
 
-    <main class="grid-container" id="appGrid">
-        </main>
+  <script>
+    function openApp(name, url) {
+      const viewer = document.getElementById('viewer');
+      const frame = document.getElementById('app-frame');
+      const title = document.getElementById('viewer-title');
+      
+      title.textContent = name;
+      frame.src = url;
+      viewer.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // กัน scroll พื้นหลัง
+    }
 
-    <div class="overlay" id="overlay">
-        <div class="overlay-bar">
-            <div class="bar-title">
-                <span id="appTitle">Loading...</span>
-            </div>
-            <button class="btn-close" onclick="closeApp()">
-                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </button>
-        </div>
-        <div class="loader">Loading Application...</div>
-        <iframe class="app-iframe" id="appFrame"></iframe>
-    </div>
+    function closeApp() {
+      const viewer = document.getElementById('viewer');
+      const frame = document.getElementById('app-frame');
+      
+      viewer.style.display = 'none';
+      frame.src = ''; // เคลียร์ RAM
+      document.body.style.overflow = 'auto';
+    }
 
-    <script>
-        // --- DATA: แอปทั้งหมดของพี่เบส ---
-        const apps = [
-            { id: 1, name: "TAPro Analysis", desc: "Automated Trading", url: "https://basssg.github.io/AlphaSense-Analysis-Webapp/", icon: '<path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>', type: 'pro' },
-            { id: 2, name: "SnD Analysis", desc: "Supply & Demand", url: "https://basssg.github.io/SnD_Analysis/", icon: '<path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>', type: 'normal' },
-            { id: 3, name: "SnDFX", desc: "Forex Matrix", url: "https://basssg.github.io/SnDForex/", icon: '<path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>', type: 'normal' },
-            { id: 4, name: "GaNesh (PIC)", desc: "My Son Gallery", url: "https://basssg.github.io/GaNesh27/", icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>', type: 'special' },
-            { id: 5, name: "XAUUSD News", desc: "Gold News", url: "https://basssg.github.io/XAUUSD-NEWS/", icon: '<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-6h11v6zm0-8H4V6h11v4zm5 8h-4v-6h4v6zm0-8h-4V6h4v4z"/>', type: 'normal' },
-            { id: 6, name: "Dashboard", desc: "System Status", url: "https://basssg.github.io/TAProAlert-Dashboard/", icon: '<path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>', type: 'normal' },
-            { id: 7, name: "Investment", desc: "Portfolio", url: "https://basssg.github.io/Investment/", icon: '<path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>', type: 'normal' },
-            { id: 8, name: "GoogleSheet", desc: "Data Logs", url: "https://basssg.github.io/GoogleSheet/", icon: '<path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>', type: 'normal' },
-            { id: 9, name: "App Script", desc: "Backend", url: "https://basssg.github.io/GoogleAppScript/", icon: '<path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>', type: 'normal' },
-            { id: 10, name: "Trip Planner", desc: "Travel", url: "https://basssg.github.io/TripPlanner/", icon: '<path d="M10.18 9"/> <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>', type: 'normal' },
-            { id: 11, name: "PickUp", desc: "Logistics", url: "https://basssg.github.io/Pickup/", icon: '<path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>', type: 'normal' }
-        ];
-
-        // --- RENDER FUNCTION ---
-        const grid = document.getElementById('appGrid');
-        
-        function renderApps(filter = '') {
-            grid.innerHTML = '';
-            apps.forEach(app => {
-                if (app.name.toLowerCase().includes(filter.toLowerCase())) {
-                    const card = document.createElement('a');
-                    card.className = `card ${app.type}`;
-                    card.href = "#";
-                    card.onclick = (e) => {
-                        e.preventDefault();
-                        openApp(app);
-                    };
-
-                    card.innerHTML = `
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24">${app.icon}</svg>
-                        </div>
-                        <div class="card-info">
-                            <h3>${app.name}</h3>
-                            <p>${app.desc}</p>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                }
-            });
-        }
-
-        // --- OVERLAY LOGIC ---
-        const overlay = document.getElementById('overlay');
-        const frame = document.getElementById('appFrame');
-        const title = document.getElementById('appTitle');
-
-        function openApp(app) {
-            title.innerText = app.name;
-            overlay.classList.add('active');
-            // Slight delay for smooth animation
-            setTimeout(() => {
-                frame.src = app.url;
-            }, 300);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeApp() {
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-            setTimeout(() => {
-                frame.src = 'about:blank';
-            }, 300);
-        }
-
-        // --- UTILS ---
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            renderApps(e.target.value);
-        });
-
-        function updateClock() {
-            const now = new Date();
-            const time = now.toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'});
-            document.getElementById('clock').innerText = time;
-        }
-
-        // Init
-        renderApps();
-        setInterval(updateClock, 1000);
-        updateClock();
-
-    </script>
+    // รองรับปุ่ม Back ของ Android/Browser ให้ปิด Overlay แทนการออกจากเว็บ
+    window.onpopstate = function() {
+      closeApp();
+    };
+  </script>
 </body>
 </html>
