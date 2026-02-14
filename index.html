@@ -9,7 +9,7 @@
   <title>EBassWave • SuperApp Hub</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -17,235 +17,206 @@
       --bg-card: rgba(13, 20, 28, 0.7);
       --accent-cyan: #00f2ff;
       --accent-violet: #7000ff;
-      --accent-green: #00ff95;
       --text-main: #f0f4f8;
       --text-dim: #94a3b8;
       --glass-border: rgba(255, 255, 255, 0.08);
       --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
     
     body {
       margin: 0;
-      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-main);
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 10% 10%, rgba(0, 242, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 90%, rgba(112, 0, 255, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
     }
-
-    /* --- Scrollbar Custom --- */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-main); }
-    ::-webkit-scrollbar-thumb { background: #1a2633; border-radius: 10px; }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: clamp(20px, 5vw, 40px);
+      padding: clamp(20px, 5vw, 60px) 20px;
     }
 
-    /* --- Header Section --- */
     header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
       margin-bottom: 50px;
+      animation: fadeInDown 0.8s ease;
     }
 
     .brand-logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 22px;
+      width: 90px;
+      height: 90px;
+      border-radius: 24px;
       background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
       padding: 2px;
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(0, 242, 255, 0.25);
+      margin: 0 auto 24px;
       transition: var(--transition);
     }
     .brand-logo:hover { transform: scale(1.05) rotate(5deg); }
-    .brand-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(1.8rem, 6vw, 3rem);
       font-weight: 800;
       margin: 0;
-      background: linear-gradient(to right, #fff, #94a3b8);
+      background: linear-gradient(to bottom, #fff 40%, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
     }
 
     .sub-tag {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 6px 16px;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 20px;
       border-radius: 100px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--accent-cyan);
       border: 1px solid var(--glass-border);
-      margin-top: 10px;
-      font-weight: 600;
+      margin-top: 15px;
+      letter-spacing: 1px;
+      font-weight: 700;
     }
 
-    /* --- Search & Filter --- */
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      width: 100%;
+    /* --- Search Section --- */
+    .search-wrapper {
       max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto 40px;
+      position: relative;
     }
-
     .search-bar {
-      flex: 1;
-      background: var(--bg-card);
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 14px 20px;
+      border-radius: 18px;
+      padding: 16px 24px;
       color: white;
-      font-family: inherit;
-      outline: none;
+      font-size: 1rem;
       transition: var(--transition);
+      backdrop-filter: blur(10px);
     }
-    .search-bar:focus { border-color: var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+    .search-bar:focus {
+      border-color: var(--accent-cyan);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    }
 
-    /* --- Bento Grid --- */
+    /* --- Grid Layout --- */
     .app-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
     .app-card {
       background: var(--bg-card);
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      border-radius: 28px;
       padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
       text-decoration: none;
       color: inherit;
       position: relative;
       overflow: hidden;
       transition: var(--transition);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, var(--glow-color), transparent 70%);
+      opacity: 0;
+      transition: var(--transition);
     }
 
     .app-card:hover {
-      transform: translateY(-8px);
-      background: rgba(25, 35, 45, 0.8);
+      transform: translateY(-10px);
       border-color: var(--glow-color);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-opacity);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-shadow);
     }
+    .app-card:hover::before { opacity: 0.15; }
 
     .app-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: #1a2633;
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: #111a24;
       display: grid;
       place-items: center;
+      position: relative;
+      z-index: 1;
       transition: var(--transition);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
-    .app-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
-    .app-icon svg { width: 28px; height: 28px; stroke: white; }
+    .app-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+    .app-icon svg { width: 32px; height: 32px; stroke: var(--glow-color); }
 
     .app-card:hover .app-icon { transform: scale(1.1) rotate(-5deg); }
 
-    .app-info h3 { margin: 0; font-size: 1.25rem; font-weight: 700; }
-    .app-info p { margin: 4px 0 0; font-size: 0.9rem; color: var(--text-dim); line-height: 1.4; }
+    .app-info { position: relative; z-index: 1; }
+    .app-info h3 { margin: 0; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+    .app-info p { margin: 6px 0 0; font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; }
 
-    .app-card .arrow {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      opacity: 0.3;
-      transition: var(--transition);
-    }
-    .app-card:hover .arrow { opacity: 1; transform: translateX(4px); }
-
-    /* --- In-App Viewer --- */
-    #super-viewer {
+    /* --- App Viewer Overlay --- */
+    #viewer-overlay {
       position: fixed;
       inset: 0;
       background: var(--bg-main);
-      z-index: 1000;
+      z-index: 2000;
       display: none;
       flex-direction: column;
-      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: viewerIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
+    @keyframes viewerIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-    .viewer-header {
-      padding: 10px 20px;
+    .v-header {
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(13, 20, 28, 0.95);
+      background: #0d141c;
       border-bottom: 1px solid var(--glass-border);
     }
 
-    .viewer-controls { display: flex; gap: 10px; }
+    .v-title-box { display: flex; align-items: center; gap: 12px; }
+    .v-title-box img { width: 28px; height: 28px; border-radius: 8px; }
+
+    .v-controls { display: flex; gap: 10px; }
     .v-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--glass-border);
       color: white;
       padding: 8px 16px;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       transition: 0.2s;
     }
     .v-btn:hover { background: rgba(255, 255, 255, 0.1); }
-    .v-btn.close { background: rgba(255, 50, 50, 0.1); color: #ff5050; }
+    .v-btn.close { background: rgba(255, 80, 80, 0.1); color: #ff5050; border-color: rgba(255, 80, 80, 0.2); }
 
-    iframe { flex: 1; border: none; width: 100%; background: white; }
+    iframe { flex: 1; border: none; width: 100%; background: #fff; }
 
-    /* --- Performance Mode Toggle --- */
-    .perf-toggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 99;
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- Responsiveness --- */
     @media (max-width: 768px) {
-      .app-grid { grid-template-columns: 1fr; }
-      .container { padding: 20px; }
-      h1 { font-size: 2.2rem; }
-    }
-
-    /* --- Performance Class --- */
-    .low-perf * {
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      animation: none !important;
-      transition: none !important;
+      .app-grid { grid-template-columns: 1fr; gap: 16px; }
+      .container { padding-top: 40px; }
+      .v-btn span { display: none; }
     }
   </style>
 </head>
@@ -256,193 +227,108 @@
       <div class="brand-logo">
         <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" alt="Logo">
       </div>
-      <h1 id="user-greeting">EBassWave SuperApp</h1>
-      <div class="sub-tag">PREMIUM ACCESS • HUB V3.0</div>
+      <h1 id="greeting">EBassWave SuperApp</h1>
+      <div class="sub-tag">11 PREMIUM APPLICATIONS</div>
     </header>
 
-    <div class="controls">
-      <input type="text" class="search-bar" id="searchApp" placeholder="ค้นหาแอปพลิเคชัน...">
+    <div class="search-wrapper">
+      <input type="text" class="search-bar" id="search" placeholder="ค้นหาแอปของพี่เบส...">
     </div>
 
-    <main class="app-grid" id="mainGrid">
-      </main>
+    <main class="app-grid" id="grid"></main>
   </div>
 
-  <div class="perf-toggle" onclick="togglePerf()">
-    <span id="perf-status">⚡ Performance: High</span>
-  </div>
-
-  <section id="super-viewer">
-    <div class="viewer-header">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <img id="v-app-icon" src="" style="width: 24px; height: 24px; border-radius: 6px;">
-        <span id="v-app-name" style="font-weight: 700;">App Name</span>
+  <section id="viewer-overlay">
+    <div class="v-header">
+      <div class="v-title-box">
+        <img id="v-icon" src="">
+        <span id="v-name" style="font-weight: 700;">App Name</span>
       </div>
-      <div class="viewer-controls">
-        <button class="v-btn" onclick="reloadApp()">รีโหลด</button>
-        <button class="v-btn" onclick="openExternal()">เบราว์เซอร์</button>
+      <div class="v-controls">
+        <button class="v-btn" onclick="location.reload()"><span>รีเฟรช Hub</span></button>
+        <button class="v-btn" onclick="openFull()"><span>เบราว์เซอร์</span></button>
         <button class="v-btn close" onclick="closeApp()">ปิดแอป</button>
       </div>
     </div>
-    <iframe id="app-iframe" allow="geolocation; microphone; camera; midi; encrypted-media;"></iframe>
+    <iframe id="v-iframe" allow="geolocation; microphone; camera; midi; encrypted-media; clipboard-write;"></iframe>
   </section>
 
   <script>
-    // --- App Configuration ---
+    // --- Full 11 Apps Data ---
     const APPS = [
-      {
-        id: 'tapro',
-        name: 'TAPro',
-        desc: 'Automated Trading Analysis Platform',
-        url: 'https://basssg.github.io/AlphaSense-Analysis-Webapp/',
-        icon: 'https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372',
-        color: '#00f2ff'
-      },
-      {
-        id: 'snd-analysis',
-        name: 'SnD Analysis',
-        desc: 'Automated SnD & Signal Detection',
-        url: 'https://basssg.github.io/SnD_Analysis/',
-        icon: 'https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372',
-        color: '#00ff95'
-      },
-      {
-        id: 'sndfx',
-        name: 'SnDFX',
-        desc: 'Supply & Demand Zone Analysis',
-        url: 'https://basssg.github.io/SnDForex/',
-        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s',
-        color: '#0062ff'
-      },
-      {
-        id: 'xauusd',
-        name: 'XAUUSD News',
-        desc: 'ข่าวสารและข้อมูลเรียลไทม์ทองคำ',
-        url: 'https://basssg.github.io/XAUUSD-NEWS/',
-        icon: 'https://www.advfn.com/common/images/company/PM_XAUUSD.png',
-        color: '#ffcc00'
-      },
-      {
-        id: 'dashboard',
-        name: 'Dashboard',
-        desc: 'System Metrics & Metrics Overview',
-        url: 'https://basssg.github.io/TAProAlert-Dashboard/',
-        icon: 'https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png',
-        color: '#a855f7'
-      },
-      {
-        id: 'ganesh',
-        name: 'GaNesh (PIC)',
-        desc: 'อัลบั้มภาพน้องกาเนส ลูกชายหัวแก้วหัวแหวน',
-        url: 'https://basssg.github.io/GaNesh27/',
-        icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372',
-        color: '#ec4899'
-      },
-      {
-        id: 'tripplanner',
-        name: 'TripPlanner',
-        desc: 'Smart Travel Assistant',
-        url: 'https://basssg.github.io/TripPlanner/',
-        icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372',
-        color: '#f97316'
-      },
-      {
-        id: 'investment',
-        name: 'Investment',
-        desc: 'Portfolio & Wealth Management',
-        url: 'https://basssg.github.io/Investment/',
-        icon: 'https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg',
-        color: '#10b981'
-      }
+      { name: 'TAPro', desc: 'Trading Analysis Platform (PROD)', url: 'https://basssg.github.io/AlphaSense-Analysis-Webapp/', color: '#00f2ff', icon: 'https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372' },
+      { name: 'SnD Analysis', desc: 'Automated Supply & Demand Analysis', url: 'https://basssg.github.io/SnD_Analysis/', color: '#00ff95', icon: 'https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372' },
+      { name: 'SnDFX', desc: 'Forex S&D Zone Detection', url: 'https://basssg.github.io/SnDForex/', color: '#4c79ff', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s' },
+      { name: 'XAUUSD News', desc: 'อัปเดตข่าวสารทองคำเรียลไทม์', url: 'https://basssg.github.io/XAUUSD-NEWS/', color: '#ffd93d', icon: 'https://www.advfn.com/common/images/company/PM_XAUUSD.png' },
+      { name: 'Dashboard', desc: 'System Metrics & Status Control', url: 'https://basssg.github.io/TAProAlert-Dashboard/', color: '#a88bff', icon: 'https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png' },
+      { name: 'GoogleSheet', desc: 'Enhanced Spreadsheet & Data', url: 'https://basssg.github.io/GoogleSheet/', color: '#ff8a4c', isSvg: true, svg: '<path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>' },
+      { name: 'App Script', desc: 'Google Apps Script Automation', url: 'https://basssg.github.io/GoogleAppScript/', color: '#ff6b9d', isSvg: true, svg: '<path d="M9 7L5 12l4 5M15 7l4 5-4 5"/>' },
+      { name: 'Investment', desc: 'Portfolio Tracking & Analysis', url: 'https://basssg.github.io/Investment/', color: '#39ffb6', icon: 'https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg' },
+      { name: 'TripPlanner', desc: 'Smart AI Travel Assistant', url: 'https://basssg.github.io/TripPlanner/', color: '#53d7ff', icon: 'https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372' },
+      { name: 'GaNesh (PIC)', desc: 'คลังภาพความทรงจำน้องกาเนส', url: 'https://basssg.github.io/GaNesh27/', color: '#ff5757', isSvg: true, svg: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-6-6-5 5-2-2-5 5"/>' },
+      { name: 'PickUp', desc: 'Real-time Pickup Tracking', url: 'https://basssg.github.io/Pickup/', color: '#00f2ff', isSvg: true, svg: '<path d="M3 15h2l2-3h6l2 3h4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>' }
     ];
 
-    const grid = document.getElementById('mainGrid');
-    const searchInput = document.getElementById('searchApp');
-    const viewer = document.getElementById('super-viewer');
-    const iframe = document.getElementById('app-iframe');
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
 
-    // --- Render Apps ---
-    function renderApps(filter = '') {
+    function render(filter = '') {
       grid.innerHTML = '';
-      const filtered = APPS.filter(app => 
-        app.name.toLowerCase().includes(filter.toLowerCase()) || 
-        app.desc.toLowerCase().includes(filter.toLowerCase())
-      );
+      APPS.filter(a => a.name.toLowerCase().includes(filter.toLowerCase())).forEach(app => {
+        const div = document.createElement('a');
+        div.className = 'app-card';
+        div.href = '#';
+        div.style.setProperty('--glow-color', app.color);
+        div.style.setProperty('--glow-shadow', app.color + '44');
+        div.onclick = (e) => { e.preventDefault(); openApp(app); };
 
-      filtered.forEach((app, index) => {
-        const card = document.createElement('a');
-        card.className = 'app-card';
-        card.href = "#";
-        card.style.setProperty('--glow-color', app.color);
-        card.style.setProperty('--glow-opacity', app.color + '33');
-        card.onclick = (e) => { e.preventDefault(); openApp(app); };
-        
-        card.innerHTML = `
-          <div class="arrow">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-          <div class="app-icon">
-            <img src="${app.icon}" alt="${app.name}" onerror="this.src='https://ui-avatars.com/api/?name=${app.name}&background=1a2633&color=fff'">
-          </div>
+        const iconContent = app.isSvg 
+          ? `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${app.svg}</svg>`
+          : `<img src="${app.icon}" onerror="this.src='https://ui-avatars.com/api/?name=${app.name}&background=111a24&color=fff'">`;
+
+        div.innerHTML = `
+          <div class="app-icon">${iconContent}</div>
           <div class="app-info">
             <h3>${app.name}</h3>
             <p>${app.desc}</p>
           </div>
         `;
-        grid.appendChild(card);
+        grid.appendChild(div);
       });
     }
 
-    // --- App Actions ---
+    const overlay = document.getElementById('viewer-overlay');
+    const iframe = document.getElementById('v-iframe');
+
     function openApp(app) {
-      document.getElementById('v-app-name').textContent = app.name;
-      document.getElementById('v-app-icon').src = app.icon;
+      document.getElementById('v-name').textContent = app.name;
+      document.getElementById('v-icon').src = app.isSvg ? '' : app.icon;
+      document.getElementById('v-icon').style.display = app.isSvg ? 'none' : 'block';
       iframe.src = app.url;
-      viewer.style.display = 'flex';
+      overlay.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-      history.pushState({app: app.id}, '', `#${app.id}`);
+      history.pushState({view: 'app'}, '', '#' + app.name.replace(/\s/g, ''));
     }
 
     function closeApp() {
-      viewer.style.display = 'none';
+      overlay.style.display = 'none';
       iframe.src = '';
       document.body.style.overflow = 'auto';
-      history.pushState(null, '', window.location.pathname);
     }
 
-    function reloadApp() {
-      const currentSrc = iframe.src;
-      iframe.src = currentSrc;
-    }
+    function openFull() { window.open(iframe.src, '_blank'); }
 
-    function openExternal() {
-      window.open(iframe.src, '_blank');
-    }
+    search.oninput = (e) => render(e.target.value);
 
-    // --- Performance Toggle ---
-    let isLowPerf = false;
-    function togglePerf() {
-      isLowPerf = !isLowPerf;
-      document.body.classList.toggle('low-perf', isLowPerf);
-      document.getElementById('perf-status').textContent = isLowPerf ? '⚡ Performance: Eco' : '⚡ Performance: High';
-    }
-
-    // --- Init ---
-    renderApps();
-
-    searchInput.oninput = (e) => renderApps(e.target.value);
-
-    window.onpopstate = (e) => {
-      if (!e.state) closeApp();
-    };
-
-    // Greeting by time
+    // Dynamic Greeting
     const hr = new Date().getHours();
-    const greetingEl = document.getElementById('user-greeting');
-    if (hr < 12) greetingEl.textContent = "อรุณสวัสดิ์ครับ พี่เบส";
-    else if (hr < 18) greetingEl.textContent = "สวัสดีตอนบ่ายครับ พี่เบส";
-    else greetingEl.textContent = "สวัสดีตอนเย็นครับ พี่เบส";
+    const g = document.getElementById('greeting');
+    if(hr < 12) g.textContent = "อรุณสวัสดิ์ครับ พี่เบส";
+    else if(hr < 18) g.textContent = "สวัสดีตอนบ่ายครับ พี่เบส";
+    else g.textContent = "สวัสดีตอนเย็นครับ พี่เบส";
 
+    render();
+    window.onpopstate = () => closeApp();
   </script>
 </body>
 </html>
