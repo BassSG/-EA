@@ -2,343 +2,390 @@
 <html lang="th">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#05080f">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b12">
+  <title>EBassWave AI SuperApp</title>
   
-  <title>EBassWave AI Hub</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #05080f;
-      --card-bg: rgba(13, 20, 33, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent-cyan: #53d7ff;
-      --accent-green: #39ffb6;
-      --accent-violet: #a88bff;
-      --text-main: #eef2f8;
-      --text-muted: #94a3b8;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --primary: #53d7ff;
+      --accent: #a88bff;
+      --bg: #070b12;
+      --card-bg: rgba(15, 22, 37, 0.8);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e8f1ff;
+      --text-muted: #93a3b8;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-      /* Premium Mesh Background */
-      background: 
-        radial-gradient(circle at 0% 0%, rgba(83, 215, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(168, 139, 255, 0.08) 0%, transparent 40%),
-        linear-gradient(135deg, #05080f 0%, #0d121f 100%);
+      /* Background Effect */
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(83, 215, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 139, 255, 0.05) 0%, transparent 40%);
     }
 
-    /* สไตล์ Loading */
-    #loader {
-      position: fixed; inset: 0; background: var(--bg); z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    #loader.hide { opacity: 0; visibility: hidden; }
-    .spinner { width: 40px; height: 40px; border: 3px solid var(--card-border); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
+    /* --- Container --- */
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: calc(20px + var(--safe-top)) 20px calc(40px + var(--safe-bottom));
+      padding: 2rem 1.5rem;
     }
 
-    /* Header Section */
-    header { text-align: center; margin-bottom: 40px; }
-    .logo-area {
-      width: 72px; height: 72px; margin: 0 auto 15px;
-      border-radius: 20px; overflow: hidden;
-      border: 2px solid var(--card-border);
-      box-shadow: 0 0 20px rgba(83, 215, 255, 0.2);
+    /* --- Header Section --- */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.8s ease;
     }
-    .logo-area img { width: 100%; height: 100%; object-fit: cover; }
-    
-    h1 { font-size: 2.2rem; font-weight: 800; margin: 10px 0; letter-spacing: -0.5px; 
-         background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .status-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; 
-                 padding: 4px 12px; border-radius: 100px; background: rgba(57, 255, 182, 0.1); color: var(--accent-green); border: 1px solid rgba(57, 255, 182, 0.2); }
-    .status-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); }
 
-    /* Search Bar */
-    .search-wrapper { position: relative; max-width: 500px; margin: 25px auto; }
+    .brand-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 30px rgba(83, 215, 255, 0.2);
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0;
+      background: linear-gradient(135deg, #fff 0%, #93a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    .tagline {
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 0.5rem;
+    }
+
+    /* --- Search Bar --- */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
     .search-input {
-      width: 100%; padding: 14px 20px 14px 45px; border-radius: 15px;
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      color: white; outline: none; transition: 0.3s; backdrop-filter: blur(10px);
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
     }
-    .search-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 15px rgba(83, 215, 255, 0.1); }
-    .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
 
-    /* App Grid */
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(83, 215, 255, 0.1);
+    }
+
+    /* --- Grid Layout --- */
     .app-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 1.2rem;
     }
 
+    /* --- Premium App Card --- */
     .app-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 20px;
+      padding: 1.2rem;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 1rem;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      backdrop-filter: blur(15px);
+      color: inherit;
+      transition: var(--transition);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(5px);
     }
-
-    /* Glow Effect on Hover */
-    .app-card::after {
-      content: ''; position: absolute; inset: 0; opacity: 0;
-      background: radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.08) 0%, transparent 70%);
-      transition: opacity 0.3s;
-    }
-    .app-card:hover::after { opacity: 1; }
 
     .app-card:hover {
       transform: translateY(-5px);
-      border-color: var(--glow-color);
-      box-shadow: 0 10px 30px -10px var(--glow-color);
+      background: rgba(25, 35, 55, 0.9);
+      border-color: rgba(83, 215, 255, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     }
 
     .app-icon {
-      width: 54px; height: 54px; border-radius: 14px;
-      background: #161e2e; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; border: 1px solid var(--card-border); overflow: hidden;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #1a2233;
+      flex-shrink: 0;
     }
-    .app-icon img { width: 100%; height: 100%; object-fit: cover; }
-    .app-icon svg { width: 26px; height: 26px; color: var(--text-main); }
 
-    .app-info { flex-grow: 1; }
-    .app-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 2px; color: var(--text-main); }
-    .app-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.3; }
-
-    /* SuperApp Viewer */
-    .viewer-overlay {
-      position: fixed; inset: 0; background: var(--bg); z-index: 10000;
-      display: none; flex-direction: column;
+    .app-info {
+      flex-grow: 1;
     }
-    .viewer-overlay.active { display: flex; }
+
+    .app-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 2px;
+      color: #fff;
+    }
+
+    .app-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .arrow-icon {
+      color: var(--text-muted);
+      opacity: 0.5;
+      transition: var(--transition);
+    }
+
+    .app-card:hover .arrow-icon {
+      opacity: 1;
+      transform: translateX(3px);
+      color: var(--primary);
+    }
+
+    /* --- SuperApp Viewer Overlay --- */
+    .app-viewer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      animation: slideUp 0.4s cubic-bezier(0, 0, 0.2, 1);
+    }
+
     .viewer-header {
-      padding: calc(10px + var(--safe-top)) 20px 10px;
-      display: flex; align-items: center; gap: 15px;
-      background: rgba(13, 20, 33, 0.9); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--card-border);
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 11, 18, 0.95);
     }
-    .viewer-controls { margin-left: auto; display: flex; gap: 10px; }
+
+    .viewer-controls {
+      display: flex;
+      gap: 1rem;
+    }
+
     .control-btn {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
-      color: white; padding: 8px 14px; border-radius: 10px; cursor: pointer;
-      font-size: 0.85rem; font-weight: 600; transition: 0.2s;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .control-btn:hover { background: rgba(255,255,255,0.15); }
-    .close-btn { background: rgba(255, 87, 87, 0.15); color: #ff5757; border-color: rgba(255, 87, 87, 0.2); }
 
-    .iframe-container { flex-grow: 1; position: relative; background: #000; }
-    iframe { width: 100%; height: 100%; border: none; }
+    iframe {
+      width: 100%;
+      flex-grow: 1;
+      border: none;
+      background: #fff;
+    }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
+    /* --- Animations --- */
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile Tweaks */
+    @media (max-width: 480px) {
       .app-grid { grid-template-columns: 1fr; }
-      .control-btn span { display: none; } /* ซ่อนข้อความปุ่มในมือถือเพื่อความคลีน */
-    }
-
-    /* Tablet Optimizations */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .app-grid { grid-template-columns: repeat(2, 1fr); }
+      h1 { font-size: 1.8rem; }
+      .container { padding: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <div id="loader"><div class="spinner"></div></div>
-
   <div class="container">
     <header>
-      <div class="logo-area">
-        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" alt="Logo">
-      </div>
-      <div class="status-tag"><div class="status-dot"></div> System Online • พี่เบส</div>
-      <h1>EBassWave AI Hub</h1>
-      
-      <div class="search-wrapper">
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="appSearch" class="search-input" placeholder="ค้นหาแอปพลิเคชันของคุณ...">
-      </div>
+      <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qTQoGdXBsb2FkEg55bGFiLXN0dW50LXNncBoza2xpbmcvZG93bmxvYWQvTWpnNE1qUXpPVFF3TXpBd01UUTJNVGt3TkRZMk5qTTRNUT09.origin?x-kcdn-pid=112372" class="brand-logo" alt="Logo">
+      <h1>EBassWave Hub</h1>
+      <div class="tagline">SuperApp AI Ecosystem</div>
     </header>
 
-    <main class="app-grid" id="mainGrid">
-      </main>
+    <div class="search-wrapper">
+      <input type="text" id="appSearch" class="search-input" placeholder="ค้นหา Application ของพี่เบส...">
+    </div>
+
+    <main class="app-grid" id="appGrid">
+      <a href="https://basssg.github.io/AlphaSense-Analysis-Webapp/" class="app-card" data-title="TAPro">
+        <img src="https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372" class="app-icon" alt="TAPro">
+        <div class="app-info">
+          <div class="app-title">TAPro</div>
+          <div class="app-desc">Automated Trading Analysis</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/SnD_Analysis/" class="app-card" data-title="SnD - Analysis">
+        <img src="https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372" class="app-icon" alt="SnD">
+        <div class="app-info">
+          <div class="app-title">SnD Analysis</div>
+          <div class="app-desc">Supply & Demand Automated</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/SnDForex/" class="app-card" data-title="SnDFX">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhDT-JrEz9EfeCII6epmLPVCgVP5EPyHBU_w&s" class="app-icon" alt="SnDFX">
+        <div class="app-info">
+          <div class="app-title">SnDFX</div>
+          <div class="app-desc">Forex Zone Analysis</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/XAUUSD-NEWS/" class="app-card" data-title="XAUUSD NEWS">
+        <img src="https://www.advfn.com/common/images/company/PM_XAUUSD.png" class="app-icon" alt="Gold News">
+        <div class="app-info">
+          <div class="app-title">XAUUSD NEWS</div>
+          <div class="app-desc">ข่าวสารทองคำ Real-time</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/TAProAlert-Dashboard/" class="app-card" data-title="Dashboard">
+        <img src="https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png" class="app-icon" alt="Dashboard">
+        <div class="app-info">
+          <div class="app-title">Dashboard</div>
+          <div class="app-desc">Metrics & Status Overview</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/TripPlanner/" class="app-card" data-title="TripPlanner">
+        <img src="https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372" class="app-icon" alt="Trip">
+        <div class="app-info">
+          <div class="app-title">TripPlanner</div>
+          <div class="app-desc">ผู้ช่วยวางแผนเที่ยวอัจฉริยะ</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/Investment/" class="app-card" data-title="Investment">
+        <img src="https://t4.ftcdn.net/jpg/03/14/80/29/360_F_314802917_bokCMjUS5cbfgNNvQ7oChkBAYFtX3gJV.jpg" class="app-icon" alt="Invest">
+        <div class="app-info">
+          <div class="app-title">Investment</div>
+          <div class="app-desc">Portfolio Data Hub</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+      <a href="https://basssg.github.io/GaNesh27/" class="app-card" data-title="GaNesh PIC">
+        <div class="app-icon" style="display:grid; place-items:center; background:var(--accent)">👶</div>
+        <div class="app-info">
+          <div class="app-title">GaNesh (PIC)</div>
+          <div class="app-desc">คลังรูปภาพลูกชายของพี่เบส</div>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+
+    </main>
+
+    <footer style="text-align:center; margin-top:4rem; color:var(--text-muted); font-size:0.8rem;">
+      © 2026 EBassWave SuperApp • Optimized by TT
+    </footer>
   </div>
 
-  <div class="viewer-overlay" id="viewer">
+  <div id="viewer" class="app-viewer">
     <div class="viewer-header">
-      <div class="app-icon" style="width: 32px; height: 32px;" id="viewerIcon"></div>
-      <div id="viewerTitle" style="font-weight: 700;">Application</div>
+      <div id="viewerTitle" style="font-weight:600">Application</div>
       <div class="viewer-controls">
-        <button class="control-btn" onclick="reloadApp()"><span>Reload</span> ↻</button>
-        <button class="control-btn" onclick="openExternal()"><span>New Tab</span> ↗</button>
-        <button class="control-btn close-btn" onclick="closeApp()"><span>Close</span> ✕</button>
+        <button class="control-btn" onclick="openExternal()">New Tab</button>
+        <button class="control-btn" onclick="closeApp()" style="color:#ff5757">CLOSE [X]</button>
       </div>
     </div>
-    <div class="iframe-container">
-      <iframe id="appFrame" src=""></iframe>
-    </div>
+    <iframe id="appIframe" src=""></iframe>
   </div>
 
   <script>
-    // ข้อมูลแอปพลิเคชันทั้งหมดของพี่เบส
-    const apps = [
-      {
-        name: "TAPro",
-        desc: "Automated Trading Analysis Platform",
-        url: "https://basssg.github.io/AlphaSense-Analysis-Webapp/",
-        icon: "https://s21-kling.klingai.com/kimg/EMXN1y8qeAoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpec2UvYWlfcG9ydGFsX3NncF9tbXVfaW1nMmltZ19haXdlYl92MTVfcG9ydHJhaXQvY2ZmNGJjNjUtMDAyZS00OTRhLWEwNWMtNmU3YzI5NTBhYzYzX2ltYWdlLnBuZw:360x360.webp?x-kcdn-pid=112372",
-        color: "rgba(83, 215, 255, 0.4)"
-      },
-      {
-        name: "SnD Analysis",
-        desc: "Smart Supply & Demand Zone Detection",
-        url: "https://basssg.github.io/SnD_Analysis/",
-        icon: "https://s15-kling.klingai.com/kimg/EMXN1y8qbwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpVc2UvYWlfcG9ydGFsX3NncF9tbXVfdHh0MmltZ19haXdlYl92MjEvNmNhOTY1NGEtNjQyYi00NzIxLTkwOGEtYWZlOGQ3NTAxZDMwX2ltYWdlLnBuZw:720x435.webp?x-kcdn-pid=112372",
-        color: "rgba(57, 255, 182, 0.4)"
-      },
-      {
-        name: "XAUUSD NEWS",
-        desc: "Real-time Gold Market Updates",
-        url: "https://basssg.github.io/XAUUSD-NEWS/",
-        icon: "https://www.advfn.com/common/images/company/PM_XAUUSD.png",
-        color: "rgba(255, 217, 61, 0.4)"
-      },
-      {
-        name: "Dashboard",
-        desc: "TAPro Alert & System Monitoring",
-        url: "https://basssg.github.io/TAProAlert-Dashboard/",
-        icon: "https://erpsoftwareblog.com/wp-content/uploads/financial-dashboards-icon-500-px2.png",
-        color: "rgba(168, 139, 255, 0.4)"
-      },
-      {
-        name: "GaNesh (PIC)",
-        desc: "คลังภาพความทรงจำของลูกชาย",
-        url: "https://basssg.github.io/GaNesh27/",
-        icon: "photo", // จะใช้ SVG แทน
-        color: "rgba(255, 107, 157, 0.4)"
-      },
-      {
-        name: "TripPlanner",
-        desc: "AI-Powered Travel Planning",
-        url: "https://basssg.github.io/TripPlanner/",
-        icon: "https://s21-kling.klingai.com/bs2/upload-ylab-stunt-sgp/se/ai_portal_sgp_mmu_txt2img_aiweb_v15/53e5aa90-d7b3-457c-8217-5266265c1a5a_image.png?x-kcdn-pid=112372",
-        color: "rgba(76, 121, 255, 0.4)"
-      },
-      {
-        name: "Google App Script",
-        desc: "Automated Scripts & APIs",
-        url: "https://basssg.github.io/GoogleAppScript/",
-        icon: "code",
-        color: "rgba(255, 87, 87, 0.4)"
-      }
-    ];
-
-    const mainGrid = document.getElementById('mainGrid');
-    const appSearch = document.getElementById('appSearch');
-
-    // ฟังก์ชันสร้างการ์ด
-    function renderApps(filter = "") {
-      mainGrid.innerHTML = "";
-      apps.filter(app => app.name.toLowerCase().includes(filter.toLowerCase())).forEach(app => {
-        const card = document.createElement('a');
-        card.className = "app-card";
-        card.href = "#";
-        card.style.setProperty('--glow-color', app.color);
-        
-        let iconContent = app.icon.startsWith('http') 
-          ? `<img src="${app.icon}" alt="${app.name}">`
-          : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`;
-
-        card.innerHTML = `
-          <div class="app-icon">${iconContent}</div>
-          <div class="app-info">
-            <div class="app-name">${app.name}</div>
-            <div class="app-desc">${app.desc}</div>
-          </div>
-        `;
-
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-          card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-        });
-
-        card.onclick = (e) => {
-          e.preventDefault();
-          openApp(app);
-        };
-
-        mainGrid.appendChild(card);
-      });
-    }
-
-    // ระบบ SuperApp Viewer
+    const searchInput = document.getElementById('appSearch');
+    const appCards = document.querySelectorAll('.app-card');
     const viewer = document.getElementById('viewer');
-    const appFrame = document.getElementById('appFrame');
+    const iframe = document.getElementById('appIframe');
     const viewerTitle = document.getElementById('viewerTitle');
-    const viewerIcon = document.getElementById('viewerIcon');
+    let currentUrl = "";
 
-    function openApp(app) {
-      viewerTitle.innerText = app.name;
-      viewerIcon.innerHTML = app.icon.startsWith('http') 
-        ? `<img src="${app.icon}">` 
-        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>`;
-      
-      appFrame.src = app.url;
-      viewer.classList.add('active');
-      document.body.style.overflow = "hidden";
+    // Search Logic
+    searchInput.addEventListener('input', (e) => {
+      const val = e.target.value.toLowerCase();
+      appCards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        card.style.display = title.includes(val) ? 'flex' : 'none';
+      });
+    });
+
+    // SuperApp Functionality
+    appCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = card.getAttribute('href');
+        const title = card.getAttribute('data-title');
+        openApp(url, title);
+      });
+    });
+
+    function openApp(url, title) {
+      currentUrl = url;
+      viewerTitle.innerText = title;
+      iframe.src = url;
+      viewer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
 
     function closeApp() {
-      viewer.classList.remove('active');
-      appFrame.src = "";
-      document.body.style.overflow = "";
-    }
-
-    function reloadApp() {
-      appFrame.contentWindow.location.reload();
+      viewer.style.display = 'none';
+      iframe.src = "";
+      document.body.style.overflow = 'auto';
     }
 
     function openExternal() {
-      window.open(appFrame.src, '_blank');
+      window.open(currentUrl, '_blank');
     }
 
-    // Search Logic
-    appSearch.addEventListener('input', (e) => renderApps(e.target.value));
-
-    // Initial Load
-    window.addEventListener('load', () => {
-      renderApps();
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hide');
-      }, 800);
+    // Escape to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") closeApp();
     });
   </script>
 </body>
