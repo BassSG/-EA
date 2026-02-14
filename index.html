@@ -3,644 +3,416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>EBassWave AI Hub</title>
+    <title>EBassWave OS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            /* Color Palette - Premium Dark */
-            --bg-main: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --bg-card-hover: rgba(51, 65, 85, 0.8);
-            --border-color: rgba(148, 163, 184, 0.1);
-            --accent-primary: #38bdf8; /* Sky Blue */
-            --accent-secondary: #818cf8; /* Indigo */
-            --accent-success: #34d399; /* Emerald */
-            --accent-warning: #fbbf24; /* Amber */
-            --accent-danger: #f87171; /* Red */
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            
-            /* Effects */
-            --glass-blur: blur(12px);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-glow: 0 0 15px rgba(56, 189, 248, 0.15);
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-deep: #050505;
+            --bg-panel: #111111;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            --primary: #3b82f6;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --glass: rgba(20, 20, 20, 0.6);
+            --blur: blur(20px);
+            --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Inter', 'Prompt', sans-serif;
-            background-color: var(--bg-main);
+            background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(129, 140, 248, 0.08), transparent 25%);
-            background-attachment: fixed;
+                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 40%),
+                linear-gradient(to bottom, #000 0%, #0a0a0a 100%);
             color: var(--text-main);
+            font-family: 'Inter', 'Prompt', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
-            padding-bottom: env(safe-area-inset-bottom);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* --- Header Section --- */
-        header {
-            padding: 2rem 1.5rem 1rem;
-            text-align: center;
-            position: relative;
+        /* --- Header --- */
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 1.5rem 1.5rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 10;
         }
 
-        .profile-area {
+        .brand {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-bottom: 1.5rem;
+            gap: 12px;
         }
 
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fff, #888);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        
-        .avatar::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 26px;
-            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-            z-index: -1;
-            opacity: 0.5;
-            filter: blur(8px);
+            font-weight: 800;
+            color: #000;
+            font-size: 20px;
         }
 
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
+        .brand-text h1 {
+            font-size: 18px;
+            font-weight: 600;
             margin: 0;
-            background: linear-gradient(to right, #fff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
         }
+        
+        .brand-text p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin: 0;
+        }
 
-        .subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-            font-weight: 300;
+        .time-badge {
+            background: rgba(255,255,255,0.05);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-family: monospace;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
         }
 
         /* --- Search Bar --- */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            position: relative;
+        .search-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
-        .search-input {
+        .search-box {
             width: 100%;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-color);
-            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 14px 20px;
             border-radius: 16px;
-            color: var(--text-main);
-            font-size: 1rem;
-            backdrop-filter: blur(8px);
-            transition: var(--transition);
+            color: white;
+            font-size: 16px;
+            transition: 0.3s var(--ease);
             outline: none;
         }
 
-        .search-input:focus {
-            background: rgba(30, 41, 59, 0.8);
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        .search-box:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
-        /* --- Stats / Widget Row --- */
-        .widgets {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            padding: 0 1.5rem;
-        }
-
-        .widget-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1rem;
-            text-align: center;
-            backdrop-filter: var(--glass-blur);
-        }
-
-        .widget-val {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-        }
-        
-        .widget-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* --- App Grid --- */
-        .app-grid {
+        /* --- Bento Grid Layout --- */
+        .grid-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem 4rem;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1rem;
-            padding: 0 1.5rem 6rem; /* Padding bottom for footer/fab */
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 16px;
+            animation: fadeIn 0.6s var(--ease);
         }
 
-        .app-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 1.25rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Card Design --- */
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 20px;
+            height: 160px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            transition: var(--transition);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.3s var(--ease);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            backdrop-filter: var(--glass-blur);
-            height: 100%;
+            text-decoration: none;
         }
 
-        .app-card:hover, .app-card:active {
+        .card:hover {
             transform: translateY(-4px);
-            background: var(--bg-card-hover);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: var(--shadow-glow);
+            background: rgba(255,255,255,0.06);
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        .app-icon-wrapper {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        /* Icon Container */
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.75rem;
-            font-size: 1.5rem;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
+            font-size: 20px;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .app-card:hover .app-icon-wrapper {
-            transform: scale(1.1);
-        }
-
-        .app-name {
-            font-size: 0.95rem;
+        .card-info h3 {
+            font-size: 15px;
             font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.25rem;
-            line-height: 1.3;
+            margin: 0 0 4px 0;
+            color: #fff;
         }
 
-        .app-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+        .card-info p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin: 0;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* Status Indicator */
-        .status-dot {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-success);
-            box-shadow: 0 0 5px var(--accent-success);
+        /* Special Card: GaNesh */
+        .card.special {
+            background: linear-gradient(135deg, rgba(255, 99, 99, 0.15), rgba(255, 99, 99, 0.05));
+            border-color: rgba(255, 99, 99, 0.3);
+            grid-column: span 2; /* Make it wider */
+        }
+        
+        .card.special .card-icon {
+            background: #ff6b6b;
+            color: white;
+            border: none;
         }
 
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            opacity: 0.6;
+        /* Special Card: TAPro */
+        .card.pro {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.02));
         }
 
-        /* --- SuperApp Overlay (Iframe) --- */
-        .super-overlay {
+        /* --- Super Overlay (App Viewer) --- */
+        .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-main);
-            z-index: 1000;
+            inset: 0;
+            background: #000;
+            z-index: 100;
             display: flex;
             flex-direction: column;
             transform: translateY(100%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s var(--ease);
         }
 
-        .super-overlay.active {
+        .overlay.active {
             transform: translateY(0);
         }
 
-        .overlay-header {
-            height: 60px;
+        .overlay-bar {
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 1rem;
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+            padding: 0 20px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .overlay-title {
+        .bar-title {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 16px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .overlay-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-control {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: var(--text-main);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-control:hover {
-            background: rgba(255,255,255,0.2);
+            gap: 10px;
         }
 
         .btn-close {
-            background: rgba(248, 113, 113, 0.2);
-            color: var(--accent-danger);
-        }
-
-        .btn-close:hover {
-            background: rgba(248, 113, 113, 0.3);
-        }
-
-        .app-frame {
-            flex: 1;
-            width: 100%;
+            background: rgba(255,255,255,0.1);
             border: none;
-            background: white; /* Default iframe bg */
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
         }
-        
-        .loading-spinner {
+        .btn-close:hover { background: rgba(255,255,255,0.2); }
+
+        .app-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .loader {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            color: var(--text-dim);
+            font-size: 14px;
             z-index: -1;
         }
 
-        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+        /* SVG Icons */
+        svg { width: 24px; height: 24px; fill: currentColor; }
 
-        /* Mobile Responsive Adjustments */
-        @media (max-width: 640px) {
-            .app-grid {
+        @media (max-width: 600px) {
+            .grid-container {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-                padding: 0 1rem 6rem;
+                gap: 12px;
             }
-            header {
-                padding: 1.5rem 1rem 0.5rem;
-            }
-            .widget-val { font-size: 1.1rem; }
-            h1 { font-size: 1.5rem; }
+            .card { height: 140px; }
+            .card.special { grid-column: span 2; }
         }
-
-        /* --- Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-main);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.15);
-            border-radius: 3px;
-        }
-
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="profile-area">
-            <div class="avatar">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <h1>EBassWave AI Hub</h1>
-            <div class="subtitle">Premium Workspace for P'Best</div>
-        </div>
-
-        <div class="search-container">
-            <i class="fa-solid fa-search search-icon"></i>
-            <input type="text" class="search-input" id="appSearch" placeholder="ค้นหาแอปของคุณ..." autocomplete="off">
-        </div>
-
-        <div class="widgets">
-            <div class="widget-card">
-                <div class="widget-val" id="clock">00:00</div>
-                <div class="widget-label">Bangkok Time</div>
-            </div>
-            <div class="widget-card">
-                <div class="widget-val" id="appCount">0</div>
-                <div class="widget-label">Total Apps</div>
+    <header class="header">
+        <div class="brand">
+            <div class="brand-logo">B</div>
+            <div class="brand-text">
+                <h1>EBassWave</h1>
+                <p>SuperApp OS v2.0</p>
             </div>
         </div>
+        <div class="time-badge" id="clock">00:00</div>
     </header>
 
-    <main class="app-grid" id="appGrid">
+    <div class="search-wrapper">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search apps..." autocomplete="off">
+    </div>
+
+    <main class="grid-container" id="appGrid">
         </main>
 
-    <footer>
-        &copy; 2025 EBassWave. Created by TT for Best. <br>
-        Speed Optimized • Zero Lag
-    </footer>
-
-    <div class="super-overlay" id="overlay">
-        <div class="overlay-header">
-            <div class="overlay-title">
-                <i class="fa-solid fa-layer-group" style="color: var(--accent-primary)"></i>
-                <span id="overlayTitle">App Name</span>
+    <div class="overlay" id="overlay">
+        <div class="overlay-bar">
+            <div class="bar-title">
+                <span id="appTitle">Loading...</span>
             </div>
-            <div class="overlay-controls">
-                <button class="btn-control" onclick="reloadApp()" title="Reload">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </button>
-                <button class="btn-control" onclick="openExternal()" title="Open in New Tab">
-                    <i class="fa-solid fa-external-link-alt"></i>
-                </button>
-                <button class="btn-control btn-close" onclick="closeApp()" title="Close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
+            <button class="btn-close" onclick="closeApp()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
         </div>
-        <div class="loading-spinner"></div>
-        <iframe class="app-frame" id="appFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-presentation"></iframe>
+        <div class="loader">Loading Application...</div>
+        <iframe class="app-iframe" id="appFrame"></iframe>
     </div>
 
     <script>
-        // --- 1. Data Configuration (รวมทุกแอปของพี่เบส) ---
+        // --- DATA: แอปทั้งหมดของพี่เบส ---
         const apps = [
-            {
-                name: "TAPro Analysis",
-                desc: "AlphaSense Automated Trading",
-                url: "https://basssg.github.io/AlphaSense-Analysis-Webapp/",
-                icon: "fa-chart-line",
-                color: "#38bdf8"
-            },
-            {
-                name: "SnD Analysis",
-                desc: "Supply & Demand Zones",
-                url: "https://basssg.github.io/SnD_Analysis/",
-                icon: "fa-layer-group",
-                color: "#818cf8"
-            },
-            {
-                name: "SnDFX",
-                desc: "Forex Matrix System",
-                url: "https://basssg.github.io/SnDForex/",
-                icon: "fa-money-bill-trend-up",
-                color: "#34d399"
-            },
-            {
-                name: "XAUUSD News",
-                desc: "Gold News Aggregator",
-                url: "https://basssg.github.io/XAUUSD-NEWS/",
-                icon: "fa-newspaper",
-                color: "#fbbf24"
-            },
-            {
-                name: "Dashboard",
-                desc: "System Overview & Alerts",
-                url: "https://basssg.github.io/TAProAlert-Dashboard/",
-                icon: "fa-gauge-high",
-                color: "#f472b6"
-            },
-            {
-                name: "Investment",
-                desc: "Portfolio Management",
-                url: "https://basssg.github.io/Investment/",
-                icon: "fa-piggy-bank",
-                color: "#a78bfa"
-            },
-            {
-                name: "Google Sheet",
-                desc: "Data & Logs",
-                url: "https://basssg.github.io/GoogleSheet/",
-                icon: "fa-table",
-                color: "#34d399"
-            },
-            {
-                name: "Google App Script",
-                desc: "Backend Automation",
-                url: "https://basssg.github.io/GoogleAppScript/",
-                icon: "fa-code",
-                color: "#60a5fa"
-            },
-            {
-                name: "Trip Planner",
-                desc: "Travel Assistant",
-                url: "https://basssg.github.io/TripPlanner/",
-                icon: "fa-plane-departure",
-                color: "#2dd4bf"
-            },
-            {
-                name: "PickUp",
-                desc: "Logistics & Delivery",
-                url: "https://basssg.github.io/Pickup/",
-                icon: "fa-truck-fast",
-                color: "#f87171"
-            },
-            {
-                name: "GaNesh (PIC)",
-                desc: "My Son's Gallery",
-                url: "https://basssg.github.io/GaNesh27/",
-                icon: "fa-child-reaching",
-                color: "#ff6b6b",
-                special: true
-            }
+            { id: 1, name: "TAPro Analysis", desc: "Automated Trading", url: "https://basssg.github.io/AlphaSense-Analysis-Webapp/", icon: '<path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>', type: 'pro' },
+            { id: 2, name: "SnD Analysis", desc: "Supply & Demand", url: "https://basssg.github.io/SnD_Analysis/", icon: '<path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>', type: 'normal' },
+            { id: 3, name: "SnDFX", desc: "Forex Matrix", url: "https://basssg.github.io/SnDForex/", icon: '<path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>', type: 'normal' },
+            { id: 4, name: "GaNesh (PIC)", desc: "My Son Gallery", url: "https://basssg.github.io/GaNesh27/", icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>', type: 'special' },
+            { id: 5, name: "XAUUSD News", desc: "Gold News", url: "https://basssg.github.io/XAUUSD-NEWS/", icon: '<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-6h11v6zm0-8H4V6h11v4zm5 8h-4v-6h4v6zm0-8h-4V6h4v4z"/>', type: 'normal' },
+            { id: 6, name: "Dashboard", desc: "System Status", url: "https://basssg.github.io/TAProAlert-Dashboard/", icon: '<path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>', type: 'normal' },
+            { id: 7, name: "Investment", desc: "Portfolio", url: "https://basssg.github.io/Investment/", icon: '<path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>', type: 'normal' },
+            { id: 8, name: "GoogleSheet", desc: "Data Logs", url: "https://basssg.github.io/GoogleSheet/", icon: '<path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>', type: 'normal' },
+            { id: 9, name: "App Script", desc: "Backend", url: "https://basssg.github.io/GoogleAppScript/", icon: '<path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>', type: 'normal' },
+            { id: 10, name: "Trip Planner", desc: "Travel", url: "https://basssg.github.io/TripPlanner/", icon: '<path d="M10.18 9"/> <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>', type: 'normal' },
+            { id: 11, name: "PickUp", desc: "Logistics", url: "https://basssg.github.io/Pickup/", icon: '<path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>', type: 'normal' }
         ];
 
-        // --- 2. Core Elements ---
+        // --- RENDER FUNCTION ---
         const grid = document.getElementById('appGrid');
-        const overlay = document.getElementById('overlay');
-        const frame = document.getElementById('appFrame');
-        const overlayTitle = document.getElementById('overlayTitle');
-        const searchInput = document.getElementById('appSearch');
-        let currentUrl = '';
-
-        // --- 3. Render Apps ---
-        function renderApps(filterText = '') {
+        
+        function renderApps(filter = '') {
             grid.innerHTML = '';
-            let count = 0;
-            
             apps.forEach(app => {
-                if (app.name.toLowerCase().includes(filterText.toLowerCase()) || 
-                    app.desc.toLowerCase().includes(filterText.toLowerCase())) {
-                    
-                    const card = document.createElement('div');
-                    card.className = 'app-card';
-                    card.onclick = () => openApp(app);
-                    
-                    // Create Icon Style
-                    const iconStyle = `color: ${app.color}; box-shadow: 0 0 10px ${app.color}40;`;
-                    
+                if (app.name.toLowerCase().includes(filter.toLowerCase())) {
+                    const card = document.createElement('a');
+                    card.className = `card ${app.type}`;
+                    card.href = "#";
+                    card.onclick = (e) => {
+                        e.preventDefault();
+                        openApp(app);
+                    };
+
                     card.innerHTML = `
-                        <div class="status-dot"></div>
-                        <div class="app-icon-wrapper" style="${iconStyle}">
-                            <i class="fa-solid ${app.icon}"></i>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24">${app.icon}</svg>
                         </div>
-                        <div class="app-name">${app.name}</div>
-                        <div class="app-desc">${app.desc}</div>
+                        <div class="card-info">
+                            <h3>${app.name}</h3>
+                            <p>${app.desc}</p>
+                        </div>
                     `;
                     grid.appendChild(card);
-                    count++;
                 }
             });
-            
-            document.getElementById('appCount').innerText = count;
         }
 
-        // --- 4. System Logic ---
-        
-        // Open App in Overlay
+        // --- OVERLAY LOGIC ---
+        const overlay = document.getElementById('overlay');
+        const frame = document.getElementById('appFrame');
+        const title = document.getElementById('appTitle');
+
         function openApp(app) {
-            currentUrl = app.url;
-            overlayTitle.innerText = app.name;
+            title.innerText = app.name;
             overlay.classList.add('active');
-            
-            // Delay source loading slightly for animation smoothness
+            // Slight delay for smooth animation
             setTimeout(() => {
                 frame.src = app.url;
             }, 300);
-            
-            // Prevent body scroll
             document.body.style.overflow = 'hidden';
         }
 
-        // Close Overlay
         function closeApp() {
             overlay.classList.remove('active');
-            
-            // Clear src to stop scripts/media
+            document.body.style.overflow = '';
             setTimeout(() => {
                 frame.src = 'about:blank';
             }, 300);
-            
-            document.body.style.overflow = '';
         }
 
-        // Controls
-        function reloadApp() {
-            frame.src = frame.src;
-        }
-
-        function openExternal() {
-            if(currentUrl) window.open(currentUrl, '_blank');
-        }
-
-        // Search Listener
-        searchInput.addEventListener('input', (e) => {
+        // --- UTILS ---
+        document.getElementById('searchInput').addEventListener('input', (e) => {
             renderApps(e.target.value);
         });
 
-        // Clock Logic
         function updateClock() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('clock').innerText = timeString;
+            const time = now.toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'});
+            document.getElementById('clock').innerText = time;
         }
 
-        // --- 5. Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderApps();
-            updateClock();
-            setInterval(updateClock, 1000);
-            
-            // Add slight entry animation
-            const cards = document.querySelectorAll('.app-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.4s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 50); // Staggered animation
-            });
-        });
+        // Init
+        renderApps();
+        setInterval(updateClock, 1000);
+        updateClock();
 
     </script>
 </body>
